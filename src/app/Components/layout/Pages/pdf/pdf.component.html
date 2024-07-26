@@ -1,0 +1,93 @@
+<p>pdf works!</p>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <div style="display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: stretch;">
+      <input type="file" (change)="capturarFile1($event)" />
+
+      <div *ngIf="previsualizacion1">
+        <img width="100%" [src]="previsualizacion1" alt="" [ngModel]="imagen1">
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile style="display: flex;">
+    <div style="display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: stretch;">
+      <input type="file" (change)="capturarFile2($event)" />
+
+      <div *ngIf="previsualizacion2">
+        <img width="100%" [src]="previsualizacion2" alt="" [ngModel]="imagen2">
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile style="display: flex;">
+    <div style="display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: stretch;">
+      <input type="file" (change)="capturarFile3($event)" />
+
+      <div *ngIf="previsualizacion3">
+        <img width="100%" [src]="previsualizacion3" alt="" [ngModel]="imagen3">
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile style="display: flex;">
+    <div style="display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: stretch;">
+      <input type="file" (change)="capturarFile4($event)" />
+
+      <div *ngIf="previsualizacion4">
+        <img width="100%" [src]="previsualizacion4" alt="" [ngModel]="imagen4">
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile style="display: flex;">
+    <div style="display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: stretch;">
+      <input type="file" (change)="capturarFile5($event)" />
+
+      <div *ngIf="previsualizacion5">
+        <img width="100%" [src]="previsualizacion5" alt="" [ngModel]="firmaCliente">
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile style="display: flex;">
+    <div style="display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: stretch;">
+      <input type="file" (change)="capturarFile6($event)" />
+
+      <div *ngIf="previsualizacion6">
+        <img width="100%" [src]="previsualizacion6" alt="" [ngModel]="firmaHomeEnergy">
+      </div>
+    </div>
+  </mat-grid-tile>
+
+</mat-grid-list>
+<h1>{{date}}</h1>
+<h2>INFORMATION ADICIONALITY </h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngIf="first.invalid">Name is too short.</div>
+
+  <input formControlName="first" placeholder="First name" />
+  <input formControlName="last" placeholder="Last name" />
+
+  <button type="submit">Submit</button>
+</form>
+<button (click)="crearPDF()">GENERAR PDF</button>

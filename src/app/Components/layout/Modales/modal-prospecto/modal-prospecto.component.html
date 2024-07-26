@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>{{tituloAccion}}  Prospecto</h2>
+<mat-dialog-content>
+  <form [formGroup]="formularioProspecto">
+
+        <mat-grid-list cols="2">
+
+          <mat-grid-tile>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input matInput autocomplete="off" formControlName="nombre">
+              <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Fachada img</mat-label>
+              <input matInput autocomplete="off" formControlName="fachadaimg">
+              <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Url</mat-label>
+              <input matInput autocomplete="off" formControlName="url">
+              <mat-icon matSuffix>fit_screen</mat-icon>
+              </mat-form-field>
+    
+              <mat-form-field appearance="outline">
+                <mat-label>Direccion</mat-label>
+                <input matInput autocomplete="off" formControlName="direccion">
+                <mat-icon matSuffix>fit_screen</mat-icon>
+              </mat-form-field>
+    
+          </mat-grid-tile>
+    
+    
+          <mat-grid-tile>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Contacto</mat-label>
+              <input matInput autocomplete="off" formControlName="contacto">
+              <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Razon Social</mat-label>
+              <input matInput autocomplete="off" formControlName="razonSocial">
+              <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>id auditor</mat-label>
+              <input matInput autocomplete="off" formControlName="idauditor">
+              <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Estado</mat-label>|
+              <mat-select formControlName="esActivo">
+                <mat-option value="1">Activo</mat-option>
+                <mat-option value="0">No activo</mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Detalle</mat-label>
+              <input matInput autocomplete="off" formControlName="detalle">
+              <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+
+          </mat-grid-tile>
+        </mat-grid-list>
+  </form>
+</mat-dialog-content>
+
+<!--<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+  <button mat-raised-button color="primary">Guardar</button>
+</mat-dialog-actions>-->
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+<!--<button mat-raised-button color="primary"[disabled]="formularioServicio.invalid"(click)="guardarEditar_Servicio()">{{botonAccion}}</button> -->
+  <button mat-raised-button color="primary"(click)="guardarEditar_Prospecto()">{{botonAccion}}</button>
+</mat-dialog-actions>

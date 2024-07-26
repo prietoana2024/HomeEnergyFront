@@ -1,0 +1,26 @@
+<p>bar-chart works!</p>
+
+<ngx-charts-advanced-pie-chart
+  [view]="view"
+  [results]="data"
+  [scheme]="colorScheme"
+  [gradient]="gradient"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)"
+  style="font-size: 12px;" class="graficas">
+</ngx-charts-advanced-pie-chart>
+
+<ngx-charts-pie-chart
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="data"
+  [gradient]="gradient"
+  [legend]="showLegend"
+  [labels]="showLabels"
+  [doughnut]="isDoughnut"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)"
+  >
+</ngx-charts-pie-chart>

@@ -1,0 +1,30 @@
+<!--<p>modal-upload works!</p>
+<input type="file" (change)="onChange($event)" class="form-control">
+<img src="{{imagenName}}" style="height: 100px;"><br>
+<button mat-raised-button mat-dialog-close color="warn">Volver</button>
+<h5>Copie el nombre de su imagen</h5>
+--->
+<div style="width: 100%">
+  <form [formGroup]="frm" (ngSubmit)="onPost()">
+    <h3>Cargar recursos</h3>
+    <div class="mb-3">
+      <input type="text" style="display: none;" class="form-control" formControlName="nombre">
+    </div>
+    <div class="mb-3">
+      <input type="file" (change)="onChange($event)" class="form-control">
+      <img src="{{prospectImage}}" style="height:auto;width:400px;"><br>
+    </div>
+    <div class="mb-3 form-check" *ngIf="rsp">
+      {{rsp.msg}}
+    </div>
+    <div style="display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: space-around;
+    align-items: center;">
+      <button type="submit" class="btn btn-primary" [disabled]="frm.invalid">Confirmar</button>
+      <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+    </div>
+  </form>
+</div>

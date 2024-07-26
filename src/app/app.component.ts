@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-
+/*
+import * as pdfMake from  'pdfmake/build/pdfmake.js';
+import * as pdfFonts from  'pdfmake/build/vfs_fonts';
+*/
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +10,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FrontHomeEnergyApp';
+  
+/*
+  generatePDF(){
+    let docDefinition= { 
+      content: [
+        'ESTE ES EL PDF'
+      ], styles:{}};
+      pdfMake.createPdf(docDefinition).open();
+  }
+*/
 }

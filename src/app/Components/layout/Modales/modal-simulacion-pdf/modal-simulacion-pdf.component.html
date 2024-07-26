@@ -1,0 +1,213 @@
+<mat-dialog-content style="min-height: 800px;width: 100%;height: 800px;">
+
+  <img src="https://astridprietoarquitecta.com/LogoFondoBlanco.png" alt="" style="width: 30%;">
+  <img src="https://astridprietoarquitecta.com/lineaVerde.png" alt="" style="width: 100%;height: 20px;">
+  <form [formGroup]="formularioCotizacion" style="width: 100%;">
+    <img src="https://www.solarnova.de/files/Inhalte/BIPV_Slider/Fassade-BedZED-England-GB.jpg" alt="" style="width: 100%;
+      "> <img src="https://astridprietoarquitecta.com/lineaVerde.png" alt="" style="width: 100%;height: 20px;">
+
+    <div style="display: flex;padding: 20px;">
+      <div style="width: 50%;">
+        <h2>Propuesta para:</h2>
+      </div>
+      <div style="width: 50%;">
+        <mat-form-field appearance="outline">
+          <mat-label>Prospecto</mat-label>
+          <input matInput autocomplete="off" formControlName="IdProspecto" placeholder="IdProspecto">
+          <mat-icon matSuffix>fit_screen</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pulgadas</mat-label>
+      <input matInput autocomplete="off" formControlName="Pulgadas2">
+      <mat-icon matSuffix>fit_screen</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pago</mat-label>
+      <input matInput autocomplete="off" formControlName="TipoPago">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Total</mat-label>
+      <input matInput autocomplete="off" formControlName="TotalTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tiempo financiado</mat-label>
+      <input matInput autocomplete="off" formControlName="TiempoFinancing">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ahorra</mat-label>
+      <input matInput autocomplete="off" formControlName="AhorraTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Valor de Intereses</mat-label>
+      <input matInput autocomplete="off" formControlName="ValorInteresesTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Cuota Mensual</mat-label>
+      <input matInput autocomplete="off" formControlName="CuotaMensualTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Suma de pago en electricidad</mat-label>
+      <input matInput autocomplete="off" formControlName="PagoElectricidadTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Porcentaje de Incremento Anual</mat-label>
+      <input matInput autocomplete="off" formControlName="PorcentajeIncremento">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mensual Aproximado</mat-label>
+      <input matInput autocomplete="off" formControlName="MensualAproxTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Valor Pagado</mat-label>
+      <input matInput autocomplete="off" formControlName="ValorPagadoTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Proyeccion Solar</mat-label>
+      <input matInput autocomplete="off" formControlName="ProyeccionSolarTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tiempo Solar</mat-label>
+      <input matInput autocomplete="off" formControlName="TiempoSolar">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Contrato</mat-label>
+      <input matInput autocomplete="off" formControlName="Contrato">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput autocomplete="off" formControlName="Email">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo Identificacion</mat-label>
+      <input matInput autocomplete="off" formControlName="TipoIdentificacion">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Identificacion</mat-label>
+      <input matInput autocomplete="off" formControlName="Identificacion">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Soc Ein</mat-label>
+      <input matInput autocomplete="off" formControlName="SocEin">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tamano Sistema</mat-label>
+      <input matInput autocomplete="off" formControlName="TamanoSistema">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pago Inicial</mat-label>
+      <input matInput autocomplete="off" formControlName="PagoInicialTexto">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Notas</mat-label>
+      <input matInput autocomplete="off" formControlName="Notas">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Url 1</mat-label>
+      <input matInput autocomplete="off" formControlName="Url1">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Url 2</mat-label>
+      <input matInput autocomplete="off" formControlName="Url2">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Url 3</mat-label>
+      <input matInput autocomplete="off" formControlName="Url3">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Url 4</mat-label>
+      <input matInput autocomplete="off" formControlName="Url4">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pdf</mat-label>
+      <input matInput autocomplete="off" formControlName="Pdf">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <!------------<mat-form-field appearance="outline">
+      <mat-label>Servicios</mat-label>
+      <mat-select multiple formControlName="Servicios">
+        <mat-option *ngFor="let item of this.listaServicios" [value]="item.idServicio"
+          onclick="servicioParaVenta($event)">
+          {{item.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>---------->
+
+    <mat-form-field>
+      <mat-label>Servicios</mat-label>
+      <mat-select formControlName="Servicios" multiple>
+        <mat-option *ngFor="let item of this.listaServicios" [value]="item">{{item.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!------- <mat-form-field>
+      <mat-label>Toppings</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        @for (topping of toppingList; track topping) {
+        <mat-option [value]="topping">{{topping}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>------------------>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+  <!--<button mat-raised-button color="primary"[disabled]="formularioServicio.invalid"(click)="guardarEditar_Servicio()">{{botonAccion}}</button> -->
+  <button mat-raised-button color="primary" (click)="guardarEditar_Cotizacion()">{{botonAccion}}</button>
+</mat-dialog-actions>

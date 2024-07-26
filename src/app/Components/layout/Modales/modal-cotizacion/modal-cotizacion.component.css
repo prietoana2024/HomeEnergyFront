@@ -1,0 +1,244 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
+    url('#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
+    url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+    url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
+src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+.montserratFont{
+  font-family: 'Montserrat';
+  font-weight: 700;
+  color: #334D6E;
+  padding-top: 5px;
+}
+.mat-mdc-chip-set {
+  max-width: 200px;
+}
+.cajitasImg{
+  width: 200px;
+  height: 200px;
+}
+mat-button-toggle-group {
+  margin-left: 12px;
+}
+/*estilos validacion de formulario*/
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalido:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.alert div {
+  color: #820000;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+select {
+  width: 100%;
+  padding: .5rem;
+}
+/*ESTILOS DE EL CONTRATO*/
+.mat-form-field-infix {
+  display: flex;
+  position: relative;
+  min-width: 0;
+  width: 800px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: space-around;
+  align-items: center;
+  justify-content: space-evenly;}
+  /*TERMINA*/
+mat-form-field {
+  margin-right: 12px;
+}
+.montserratFont h3{
+  font-family: 'Montserrat';
+  font-weight: 700;
+  color: #334D6E;
+  padding-top: 5px;
+}
+mat-dialog-content{
+  width: 750px;
+  height: 800px;
+}
+.contenedorSolar{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: space-around;
+  justify-content: center;
+  align-items: center;
+}
+.cajaSolar{
+  border-radius: 25px;
+    background: #86E2FF;
+    padding: 20px;
+    margin-bottom: 80px;
+    height: 250px;
+}
+.cajitaAncho{
+  max-width: 1200px;
+  max-height: 750px;
+}
+.ustedPagara{
+  color: #334D6E;
+    border-radius: 10px;
+    background: #86E2FF;
+    padding: 10px;
+    margin-top: 10px;
+    width: 200px;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 15px;
+    height: 40px;
+}
+.cajaProyeccion{
+  width: 350px;
+}
+.inputSolar{
+  width: 100%;
+  border-radius: 15px;
+  height: 50px;
+  border-color: #00e5ff;
+  background: transparent;
+  font-size: 25px;
+  font-family: 'Montserrat';
+    font-weight: 700;
+  color: #0d47a1;
+}
+.full-width{
+  width: 100%;
+}
+table{
+  width: 100%;
+}
+tr.mat-row, tr.mat-footer-row {
+  height: 70px;
+}
+thead{
+  display: none;
+}
+tr.mat-header-row{
+  display: none;
+}
+mat-button-toggle-group {
+  margin-left: 12px;
+}
+.mat-grid-tile-content{
+  top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+}
+.buttonsFinancing{
+  font-family: 'Montserrat';
+  font-weight: 500;
+   width: 200px;
+    border-radius: 15px;
+    height: 500px;
+    border-color: #00e5ff;
+    background: transparent;
+    font-size: 25px;
+    font-family: '';
+    font-weight: 500;
+    color: #0d47a1;
+  }
+  .inputTotal{
+    width: 200px;
+    border-radius: 15px;
+    height: 50px;
+    border-color: #00e5ff;
+    background: transparent;
+    font-size: 25px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: #0d47a1;
+  }
+ .buttonFive{ 
+    width: 200px;
+    border-radius: 15px;
+    height: 50px;
+    border-color: #00e5ff;
+    background: transparent;
+    font-size: 25px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    color: #0d47a1;
+  }
+  .buttonFive:hover{ 
+    width: 200px;
+    border-radius: 15px;
+    height: 50px;
+    border-color: #00e5ff;
+    background: #0d47a1;
+    font-size: 25px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: #fff;
+  }
+@media (max-width: 1450px) {
+  mat-dialog-content{
+    width: 650px;
+    height: 650px;
+  }
+  .cajitaAncho{
+    max-width: 1050px;
+    max-height: auto;
+  }
+}
+@media (max-width: 1300px) {
+  mat-dialog-content{
+    width: 550px;
+    height: 500px;
+  }
+}
+
+@media (max-width: 1000px) {
+  mat-dialog-content{
+    width: 700px;
+    height: 600px;
+  }
+  .cajitaAncho{
+    max-width: 700px;
+    max-height: auto;
+  }
+}
+@media (max-width: 500px) {
+  mat-dialog-content{
+    width: 700px;
+    height: 600px;
+  }
+  .cajitaAncho{
+    max-width: 350px;
+    max-height: auto;
+    display: inline-block;
+  }
+}

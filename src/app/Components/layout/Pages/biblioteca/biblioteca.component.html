@@ -1,0 +1,144 @@
+<p>biblioteca works!</p>
+<div class="mat-elevation-z2">
+  <table mat-table [dataSource]="dataListaProspecto">
+    <!-- Nombre del Prospecto -->
+    <ng-container matColumnDef="idProspecto">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{element.idProspecto}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let element">{{element.nombre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fachadaimg">
+      <th mat-header-cell *matHeaderCellDef>Fachada</th>
+      <td mat-cell *matCellDef="let element">{{element.fachadaimg}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef>Url</th>
+      <td mat-cell *matCellDef="let element"><img src="{{element.url}}"></td>
+      <!---<td mat-cell *matCellDef="let element">{{element.url}}</td>---->
+    </ng-container>
+
+    <ng-container matColumnDef="direccion">
+      <th mat-header-cell *matHeaderCellDef>Direccion</th>
+      <td mat-cell *matCellDef="let element">{{element.direccion}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="contacto">
+      <th mat-header-cell *matHeaderCellDef>Contacto</th>
+      <td mat-cell *matCellDef="let element">{{element.contacto}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="razonSocial">
+      <th mat-header-cell *matHeaderCellDef>Razon Social</th>
+      <td mat-cell *matCellDef="let element">{{element.razonSocial}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="idauditor">
+      <th mat-header-cell *matHeaderCellDef>Id auditor</th>
+      <td mat-cell *matCellDef="let element">{{element.idauditor}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="detalle">
+      <th mat-header-cell *matHeaderCellDef>Detalle</th>
+      <td mat-cell *matCellDef="let element">{{element.detalle}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.esActivo == 1 ? 'Activo' : 'No Activo'}}
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef style="width: 160px"></th>
+      <td mat-cell *matCellDef="let element">
+        <!---<button mat-icon-button color="primary" (click)="editarProspecto(element)" >
+          <mat-icon>edit</mat-icon>
+        </button>--->
+        <button mat-icon-button color="danger" (click)="uploadImage(element.idProspecto,element.url)" >
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="removeImage(element.idProspecto,element.nombre)" >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="loadingImage()" >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnasTabla"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
+</div>
+<!----
+<form [formGroup]="formularioProspecto">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput autocomplete="off" formControlName="nombre" placeholder="nombre">
+    <mat-icon matSuffix>fit_screen</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>fachadaimg</mat-label>
+    <input matInput autocomplete="off" formControlName="fachadaimg">
+    <mat-icon matSuffix>fit_screen</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>url</mat-label>
+    <img src="">
+    <input matInput autocomplete="off"  formControlName="url">
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>direccion</mat-label>
+    <input matInput autocomplete="off" formControlName="direccion">
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline">
+    <mat-label>contacto</mat-label>
+    <input matInput autocomplete="off" formControlName="contacto">
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>razonSocial</mat-label>
+    <input matInput autocomplete="off" formControlName="razonSocial">
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>idauditor</mat-label>
+    <input matInput autocomplete="off" formControlName="idauditor">
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>detalle</mat-label>
+    <input matInput autocomplete="off" formControlName="detalle">
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Estado</mat-label>
+    <mat-select formControlName="esActivo">
+      <mat-option value="1">Activo</mat-option>
+      <mat-option value="0">No activo</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>---->

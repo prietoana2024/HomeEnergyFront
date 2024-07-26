@@ -1,0 +1,9 @@
+.columna{
+  position: relative;
+}
+.imagen-cover{
+  position: absolute;
+    width: 100%;
+    z-index: inherit;
+    height: 100%;
+}

@@ -1,0 +1,122 @@
+<h1 style="margin: 20px 0px 0px 40px">Cotización de servicios</h1>
+<mat-card style="margin: 20px 40px 40px 40px">
+  <mat-card-title>
+
+    <mat-card-content>
+      <form [formGroup]="formularioServicioVenta" (ngSubmit)="agregarServicioParaVenta()" >
+
+        <mat-grid-list cols="4" rowHeight="80px">
+
+          <mat-grid-tile [colspan]="2">
+
+            <mat-form-field class="full-width" appearance="fill">
+
+                <mat-label>Servicio</mat-label>
+                <input matInput type="text" placeholder="Buscar..." [matAutocomplete]="auto"
+                 formControlName="servicio">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                  (optionSelected)="servicioParaVenta($event)"
+                  [displayWith]="mostrarServicio">
+                     <mat-option *ngFor="let option of listaServiciosFiltro" [value]="option">
+                        {{option.nombre}}
+                     </mat-option>
+                  </mat-autocomplete>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field class="full-width" appearance="fill" style="margin-left: 40px;">
+                <mat-label>Pulgadas Cuadradas</mat-label>
+                <input matInput type="number" formControlName="cantidad" />
+            </mat-form-field>
+          </mat-grid-tile>
+          
+          <mat-grid-tile>
+            <button mat-raised-button color="primary" style="width: 80%;" [disabled]="formularioServicioVenta.invalid">
+              <mat-icon mat-list-icon>add</mat-icon>Agregar
+            </button>
+          </mat-grid-tile>
+          
+        </mat-grid-list>
+
+      </form>
+
+      <mat-grid-list cols="4" rowHeight="80px">
+             <mat-grid-tile [colspan]="2">
+                <mat-form-field class="full-width" appearance="outline" style="margin-left: 40px;">
+                  <mat-label>Tipo de Pago</mat-label>
+                  <mat-select [(value)]="tipodePagoPorDefecto">
+                    <mat-option value="Efectivo">Contado</mat-option>
+                    <mat-option value="Tarjeta">Tarjeta</mat-option>
+                    <mat-option value="CuotasSinIni">A cuotas sin inicial</mat-option>
+                    <mat-option value="CuotasConIni15">Cuotas con Inicial del 15%</mat-option>
+                    <mat-option value="CuotasConIni25">Cuotas con Inicial del 25%</mat-option>
+                    <mat-option value="CuotasConIni35">Cuotas con Inicial del 35%</mat-option>
+                    <mat-option value="CuotasConIni45">Cuotas con Inicial del 45%</mat-option>
+                  </mat-select>
+                </mat-form-field>
+             </mat-grid-tile>
+
+             <mat-grid-tile >
+                <button mat-raised-button color="accent" style="width: 80%;">
+                  TOTAL:SD/.{{totalPagar.toFixed(2)}}
+                </button>
+             </mat-grid-tile>
+             
+        
+      </mat-grid-list>
+
+      <div class="mat-elevation-z2">
+          <table mat-table [dataSource]="datosDetalleVenta">
+
+            <ng-container matColumnDef="servicio">
+              <th mat-header-cell *matHeaderCellDef>Servicio</th>
+              <td mat-cell *matCellDef="let element">{{element.descripcionServicio}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+              <td mat-cell *matCellDef="let element">{{element.cantidad}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="stock">
+              <th mat-header-cell *matHeaderCellDef>Stock</th>
+              <td mat-cell *matCellDef="let element">{{element.stock}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="precio">
+              <th mat-header-cell *matHeaderCellDef>Precio</th>
+              <td mat-cell *matCellDef="let element">{{element.precioTexto}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef>Total</th>
+              <td mat-cell *matCellDef="let element">{{element.totalTexto}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="accion">
+              <th mat-header-cell *matHeaderCellDef style="width: 80px"></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="warn" (click)="eliminarServicio(element)" >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnasTabla"></tr>
+          </table>
+        </div>
+
+        <mat-grid-list cols="4" rowHeight="80px">
+          <mat-grid-tile [colspan]="3"></mat-grid-tile>
+          <mat-grid-tile >
+            <button mat-raised-button color="primary" style="width: 80%;"
+            [disabled]="listaServiciosParaVenta.length<1||bloquearBotonRegistrar"
+            (click)="registrarVenta()">
+              <mat-icon>new_label</mat-icon>Registrar
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card-content>
+  </mat-card-title>

@@ -1,0 +1,19 @@
+<p>insertar link</p>
+<input type="text" id="link" [(ngModel)]="link" class="form-control">
+<p>modal-upload-image works!</p>
+<input type="file" (change)="onchange($event)" class="form-control"><br><br>
+<p>{{code}}</p><br><br>
+<img src="{{prospectImage}}" style="height: 100px;"><br>
+<button mat-raised-button mat-dialog-close color="warn">Volver</button>
+<button mat-raised-button color="primary" (click)="save()">Save</button>
+<h5>ULTIMAS IMAGENES GUARDADAS</h5>
+<!---<ul class="list-group" *ngFor="let ar of dataInicio">
+  <li class="list-group-item active">{{ar.idProspecto}}</li>
+  <li class="list-group-item active"><img src="../../../../../assets/images/{{ar.url}}" height="50px"></li>
+</ul>-->
+<!-----
+<form #formulario="ngForm">
+  <input type="file" (change)="fileEvent($event)">
+  <button (click)="subirArchivo($event)">Subir archivo</button>
+<hr>
+</form>---->
