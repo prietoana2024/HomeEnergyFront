@@ -4,6 +4,7 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTabsModule} from '@angular/material/tabs';
 //Compomnetes de angular material
+//
 
 import { MatCardModule} from '@angular/material/card';
 import { MatInputModule} from '@angular/material/input';
@@ -39,8 +40,10 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
+import {NgxPaginationModule} from 'ngx-pagination';
 
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [],
   imports: [
@@ -77,7 +80,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     TextFieldModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgxPaginationModule,
+    MatExpansionModule,
+    MatMenuModule
   ],
   providers:[
     MatDatepickerModule,

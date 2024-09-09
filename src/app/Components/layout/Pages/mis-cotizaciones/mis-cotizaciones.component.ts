@@ -161,7 +161,6 @@ export class MisCotizacionesComponent implements OnInit,AfterViewInit {
 
     this.listaProspectosParaVenta.push({
       idProspecto:this.prospectoSeleccionado.idProspecto,
-      descripcionProspecto:this.prospectoSeleccionado.nombre,
       idCliente:this.prospectoSeleccionado.idProspecto,
       nombre:this.prospectoSeleccionado.nombre,
       fachadaimg:this.prospectoSeleccionado.fachadaimg,
@@ -170,11 +169,9 @@ export class MisCotizacionesComponent implements OnInit,AfterViewInit {
       contacto: this.prospectoSeleccionado.contacto,
       razonSocial:this.prospectoSeleccionado.razonSocial,
       idauditor:this.prospectoSeleccionado.idauditor,
-      descripcionAuditor:'',
       detalle:this.prospectoSeleccionado.detalle,
       esActivo:this.prospectoSeleccionado.esActivo,
-      fecha:'',
-      fechaRegistro:''
+      fecha:''
 
     })
 

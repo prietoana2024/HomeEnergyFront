@@ -45,6 +45,9 @@ export class LoginComponent implements OnInit {
     next:(data)=>{
       if(data.status){
         this._utilidadServicio.guardarSesionUsuario(data.value);
+
+        -
+        
         this.router.navigate(["pages"])
       }else{
         this._utilidadServicio.mostrarAlerta("No se encontraron coincidencias","Opps!")

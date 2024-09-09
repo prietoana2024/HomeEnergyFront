@@ -36,8 +36,16 @@ import { ModalUploadComponent } from './Modales/modal-upload/modal-upload.compon
 import { PdfComponent } from './Pages/pdf/pdf.component';
 import { CotizacionCompleteComponent } from './Pages/cotizacion-complete/cotizacion-complete.component';
 import { ModalSimulacionPdfComponent } from './Modales/modal-simulacion-pdf/modal-simulacion-pdf.component';
-
-
+import { DetalleComponent } from './Pages/detalle/detalle.component';
+import { DashBoardVComponent } from './Pages/dash-board-v/dash-board-v.component';
+import { ServicioVComponent } from './Pages/servicio-v/servicio-v.component';
+import { ProspectoVComponent } from './Pages/prospecto-v/prospecto-v.component';
+import { ModalClienteComponent } from './Modales/modal-cliente/modal-cliente.component';
+import { ModalCalendarioInstalacionComponent } from './Modales/modal-calendario-instalacion/modal-calendario-instalacion.component';
+import { FormularioSelectComponent } from './Pages/formulario-select/formulario-select.component';
+import { ModalClienteEditComponent } from './Modales/modal-cliente-edit/modal-cliente-edit.component';
+import { RelacionClienteUsuarioComponent } from './Pages/relacion-cliente-usuario/relacion-cliente-usuario.component';
+import { ClienteVComponent } from './Pages/cliente-v/cliente-v.component';
 @NgModule({
   declarations: [
     DashBoardComponent,
@@ -70,14 +78,25 @@ import { ModalSimulacionPdfComponent } from './Modales/modal-simulacion-pdf/moda
     ModalUploadComponent,
     PdfComponent,
     CotizacionCompleteComponent,
-    ModalSimulacionPdfComponent
+    ModalSimulacionPdfComponent,
+    DetalleComponent,
+    DashBoardVComponent,
+    ServicioVComponent,
+    ProspectoVComponent,
+    ModalClienteComponent,
+    ModalCalendarioInstalacionComponent,
+    FormularioSelectComponent,
+    ModalClienteEditComponent,
+    RelacionClienteUsuarioComponent,
+    ClienteVComponent
   ],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     SharedModule,
     FormsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    FormsModule
   ]
 })
 export class LayoutModule { }

@@ -1,9 +1,63 @@
-.columna{
-  position: relative;
+.example-container {
+  display: flex;
+  flex-direction: column;
 }
-.imagen-cover{
+
+.example-container > * {
+  width: 100%;
+}
+.mat-grid-tile-content{
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   position: absolute;
-    width: 100%;
-    z-index: inherit;
-    height: 100%;
+  display: inline-grid!important;
+  align-items: flex-start!important;
+  justify-content: initial!important;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+.contenedorInputs{
+  width: 100%;
+}
+.mi-clase1{display: flex;}
+.mi-boton-mas{
+  border:0px;
+  float: right;
+}
+.texto-justificado{
+  display: flex;
+}
+.barra-busqueda{
+  display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+}
+.mi-barra{
+  width: 50%;
+}
+.botonesOcultos {
+  background: #05862a;
+  border-radius: 25px ;
+  color: #000000;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+}
+.RemoverBotones {
+  font-weight: 600;
+}
+.mis-botones-ocultos{
+  display: flex;
+}
+@media (max-width: 500px) {
+
+  .barra-busqueda{
+
+    display: block;
+  }
 }

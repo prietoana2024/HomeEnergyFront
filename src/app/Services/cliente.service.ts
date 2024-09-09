@@ -14,12 +14,13 @@ export class ClienteService {
   
   constructor(private http:HttpClient) { }
 
+  guardar(request:Cliente):Observable<ResponseApi>
+{
+  return this.http.post<ResponseApi>(`${this.urlApi}Guardar`,request)
+}
+  
   lista():Observable<ResponseApi>{
     return this.http.get<ResponseApi>(`${this.urlApi}Lista`)
-  }
-  guardar(request:Cliente):Observable<ResponseApi>
-  {
-    return this.http.post<ResponseApi>(`${this.urlApi}Guardar`,request)
   }
   editar(request:Cliente):Observable<ResponseApi>
   {
@@ -28,5 +29,6 @@ export class ClienteService {
   eliminar(id:number):Observable<ResponseApi>
   {
     return this.http.delete<ResponseApi>(`${this.urlApi}Eliminar/${id}`)
-}
+  }
+
 }

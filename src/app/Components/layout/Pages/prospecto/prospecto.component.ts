@@ -34,6 +34,7 @@ export class ProspectoComponent implements OnInit, AfterViewInit {
       this._prospectoServicio.lista().subscribe({
         next: (data) => {
           if (data.status) {
+            this.dataInicio = data.value;
             this.dataListaProspecto.data = data.value;
             console.log(this.dataListaProspecto);
           } else

@@ -1,0 +1,88 @@
+<mat-card style="margin: 20px 40px 40px 40px">
+  <mat-card-content>
+    <h2>Clientes según sus usuarios y asignación</h2>
+
+
+
+    <mat-grid-list cols="12" rowHeight="750px">
+      <mat-grid-tile colspan="2">
+
+        <div style="display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        flex-wrap: nowrap;
+        align-items: flex-start;">
+          <button mat-flat-button color="primary" style="width: 100%;" (click)="traerTodos()">Todos</button>
+          <div *ngFor="let itemUsuario of listadeMisUsuarios; trackBy:trackByItems1; let i=index"
+            (click)="traerClientes(itemUsuario.nombreCompleto)" style="display:flex;">
+            <div style="display: flex;">
+              <h3>{{itemUsuario.nombreCompleto}}</h3>
+            </div>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="10" rowHeight="650px">
+        <div style="width: 90%;">
+          <div *ngIf="nombre">
+            <h1>Prospectos para el usuario {{nombre}}</h1>
+          </div>
+          <div class="row">
+            <div *ngFor="let itemDelUsuario of listaClienteUsuarioNombre; trackBy:trackByItems; let i=index"
+              class="card col-12 m-3 p-0" style="max-width: 220px;max-height:200px;">
+              <div class="row g-0 ">
+                <div class="col-md-4 columna" style="display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    align-content: space-around;
+                    justify-content: space-between;
+                    align-items: stretch;">
+                  <img src="./../../../../../assets/images/{{itemDelUsuario.fachadaimg}}" class="rounded-start"
+                    alt="...">
+                  <!---------<div style="display: flex;">
+                        <button mat-icon-button color="primary" (click)="editarCliente(itemDelUsuario)">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+    
+                        <button mat-icon-button color="warn" (click)="eliminarCliente(itemDelUsuario)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>------>
+                </div>
+                <div class="col-md-6 texto-justificado">
+                  <div class="card-body">
+                    <h5 class="card-title">{{itemDelUsuario.descripcionCliente}}</h5>
+                    <p class="card-text">{{itemDelUsuario.contacto}}</p>
+                    <p class="card-text">{{itemDelUsuario.idauditor}}</p>
+                    <p class="card-text">{{itemDelUsuario.fecha}}</p>
+                    <p class="card-text">{{itemDelUsuario.fechaRegistro}}</p>
+
+                  </div>
+                </div>
+                <div class="col-md-2 texto-justificado">
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+                    (click)="capturarCliente(itemDelUsuario)">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+
+                    <button mat-menu-item *ngFor="let itemUsuario of listadeMisUsuarios;"
+                      (click)="asignarCliente(itemUsuario)">
+                      <mat-icon>person</mat-icon>
+                      <span>{{itemUsuario.idUsuario}} </span>
+                      <span>{{itemUsuario.nombreCompleto}}</span>
+                    </button>
+
+                  </mat-menu>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
+
+<!---------SEGUNDO MODULO-->

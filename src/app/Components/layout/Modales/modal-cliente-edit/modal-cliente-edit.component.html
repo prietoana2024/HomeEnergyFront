@@ -1,0 +1,105 @@
+<h2 mat-dialog-title>{{tituloAccion}} Cliente</h2>
+<mat-dialog-content style="height: 800px;width: 900px;">
+  <form [formGroup]="formularioCliente">
+    <mat-grid-list cols="2" rowHeight="600px">
+
+      <mat-grid-tile>
+
+        <div class="boxLeft">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput autocomplete="off" formControlName="nombre" placeholder="nombre">
+            <mat-icon matSuffix>fit_screen</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>fachadaimg</mat-label>
+            <input matInput autocomplete="off" formControlName="fachadaimg">
+            <mat-icon matSuffix>fit_screen</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>url</mat-label>
+            <input matInput autocomplete="off" formControlName="url">
+            <!---<input matInput autocomplete="off" formControlName="url" (change)="eventPhoto($event)">---->
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+
+          <div *ngIf="previsualizacion">
+            <img width="200px" [src]="previsualizacion" alt="">
+          </div>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>direccion</mat-label>
+            <input matInput autocomplete="off" formControlName="direccion">
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Prospecto</mat-label>
+            <input matInput autocomplete="off" formControlName="idProspecto">
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha</mat-label>
+            <input matInput autocomplete="off" formControlName="fecha">
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+        </div>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <div class="boxRight">
+          <mat-form-field appearance="outline">
+            <mat-label>contacto</mat-label>
+            <input matInput autocomplete="off" formControlName="contacto">
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>razonSocial</mat-label>
+            <input matInput autocomplete="off" formControlName="razonSocial">
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>idauditor</mat-label>
+            <input matInput autocomplete="off" formControlName="idauditor">
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>detalle</mat-label>
+            <input matInput autocomplete="off" formControlName="detalle">
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="esActivo">
+              <mat-option value="1">Activo</mat-option>
+              <mat-option value="0">No activo</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha Registro</mat-label>
+            <input matInput autocomplete="off" formControlName="fechaRegistro">
+            <mat-icon matSuffix>attach_money</mat-icon>
+          </mat-form-field>
+        </div>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+  <!--<button mat-raised-button color="primary"[disabled]="formularioServicio.invalid"(click)="guardarEditar_Servicio()">{{botonAccion}}</button> -->
+  <button mat-raised-button color="primary" (click)="guardarEditar_Cliente()">{{botonAccion}}</button>
+</mat-dialog-actions>

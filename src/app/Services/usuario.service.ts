@@ -24,6 +24,9 @@ export class UsuarioService {
   lista():Observable<ResponseApi>{
     return this.http.get<ResponseApi>(`${this.urlApi}Lista`)
   }
+  listaNombres():Observable<ResponseApi>{
+    return this.http.get<ResponseApi>(`${this.urlApi}ListaNombres`)
+  }
   guardar(request:Usuario):Observable<ResponseApi>
   {
     return this.http.post<ResponseApi>(`${this.urlApi}Guardar`,request)
@@ -31,6 +34,14 @@ export class UsuarioService {
   editar(request:Usuario):Observable<ResponseApi>
   {
     return this.http.put<ResponseApi>(`${this.urlApi}Editar`,request)
+  }
+  editarActivo(id:number):Observable<ResponseApi>
+  {
+    return this.http.delete<ResponseApi>(`${this.urlApi}EditarActivo/${id}`)
+  }
+  editarNoActivo(id:number):Observable<ResponseApi>
+  {
+    return this.http.delete<ResponseApi>(`${this.urlApi}EditarNoActivo/${id}`)
   }
   eliminar(id:number):Observable<ResponseApi>
   {

@@ -22,20 +22,31 @@ import { BibliotecaComponent } from './Pages/biblioteca/biblioteca.component';
 import { FileComponent } from './Pages/file/file.component';
 import { PdfComponent } from './Pages/pdf/pdf.component';
 import { CotizacionCompleteComponent } from './Pages/cotizacion-complete/cotizacion-complete.component';
+import { DetalleComponent } from './Pages/detalle/detalle.component';
+import { DashBoardVComponent } from './Pages/dash-board-v/dash-board-v.component';
+import { ServicioVComponent } from './Pages/servicio-v/servicio-v.component';
+import { ProspectoVComponent } from './Pages/prospecto-v/prospecto-v.component';
+import { FormularioSelectComponent } from './Pages/formulario-select/formulario-select.component';
+import { RelacionClienteUsuarioComponent } from './Pages/relacion-cliente-usuario/relacion-cliente-usuario.component';
+import { ClienteVComponent } from './Pages/cliente-v/cliente-v.component';
 
 const routes: Routes = [{
   path:'',
   component:LayoutComponent,
   children:[
     {path:'dashboard',component:DashBoardComponent},
+    {path:'dashboard-v',component:DashBoardVComponent},
     {path:'usuarios',component:UsuarioComponent},
     {path:'servicios',component:ServicioComponent},
+    {path:'servicios-v',component:ServicioVComponent},
     {path:'venta',component:VentaComponent},
     {path:'historial_venta',component:HistorialVentaComponent},
     {path:'reportes',component:ReporteComponent},
     {path:'estado',component:EstadoComponent},
     {path:'clientes',component:ClienteComponent},
+    {path:'clientes-v',component:ClienteVComponent},
     {path:'prospectos',component:ProspectoComponent},
+    {path:'prospectos-v',component:ProspectoVComponent},
     {path:'cotizacion',component:CotizacionComponent},
     {path:'mis-cotizaciones',component:MisCotizacionesComponent},
     {path:'simulacion',component:SimulacionComponent},
@@ -47,7 +58,10 @@ const routes: Routes = [{
     {path:'biblioteca',component:BibliotecaComponent},
     {path:'file',component:FileComponent},
     {path:'pdf1',component:PdfComponent},
-    {path:'cotizacionCompleta',component:CotizacionCompleteComponent}
+    {path:'cotizacionC',component:CotizacionCompleteComponent},
+    {path:'detalle',component:DetalleComponent},
+    {path:'formulario',component:FormularioSelectComponent},
+    {path:'relacion-usuario',component:RelacionClienteUsuarioComponent}
   ]
 }];
 

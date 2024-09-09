@@ -34,6 +34,7 @@
     "ng-pdf-make": "^0.1.1",
     "ng2-charts": "^5.0.4",
     "ngx-markdown": "^17.1.0",
+    "ngx-pagination": "^6.0.3",
     "os-browserify": "^0.3.0",
     "pdfmake": "^0.2.10",
     "polyfill": "^0.1.0",

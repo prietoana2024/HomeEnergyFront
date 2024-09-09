@@ -16,6 +16,8 @@ export class ModalPruebaComponent implements OnInit {
   tituloAccion:string="Agregar";
   botonAccion:string="Guardar";
 
+  previsualizacion:any;
+
   constructor(
     private modalActual:MatDialogRef<ModalPruebaComponent>,
     @Inject(MAT_DIALOG_DATA) public datosProspecto:Prospecto,
@@ -61,7 +63,14 @@ export class ModalPruebaComponent implements OnInit {
       })
     }
 
+    this.previsualizacion=this.datosProspecto.url;
+
   }
+  eventPhoto(event:any){
+
+      
+    this.previsualizacion=this.formularioProspecto.value.url;
+    }
 
 
   guardarEditar_Prospecto(){

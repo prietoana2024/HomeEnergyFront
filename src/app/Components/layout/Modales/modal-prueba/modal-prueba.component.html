@@ -1,5 +1,4 @@
-<p>modal-prueba works!</p>
-<h2 mat-dialog-title>{{tituloAccion}}Prospecto</h2>
+<h2 mat-dialog-title>{{tituloAccion}} Prospecto</h2>
 <mat-dialog-content style="height: 800px;width: 900px;">
   <form [formGroup]="formularioProspecto">
     <mat-grid-list cols="2" rowHeight="600px">
@@ -13,26 +12,31 @@
             <input matInput autocomplete="off" formControlName="nombre" placeholder="nombre">
             <mat-icon matSuffix>fit_screen</mat-icon>
           </mat-form-field>
-  
+
           <mat-form-field appearance="outline">
             <mat-label>fachadaimg</mat-label>
             <input matInput autocomplete="off" formControlName="fachadaimg">
             <mat-icon matSuffix>fit_screen</mat-icon>
           </mat-form-field>
-  
+
           <mat-form-field appearance="outline">
             <mat-label>url</mat-label>
-            <input matInput autocomplete="off" formControlName="url">
+            <input matInput autocomplete="off" formControlName="url" (change)="eventPhoto($event)">
             <mat-icon matSuffix>attach_money</mat-icon>
           </mat-form-field>
-  
+
+          <div *ngIf="previsualizacion">
+            <img width="200px" [src]="previsualizacion" alt="">
+          </div>
+
+
           <mat-form-field appearance="outline">
             <mat-label>direccion</mat-label>
             <input matInput autocomplete="off" formControlName="direccion">
             <mat-icon matSuffix>attach_money</mat-icon>
           </mat-form-field>
         </div>
-       
+
       </mat-grid-tile>
 
       <mat-grid-tile>
@@ -42,25 +46,25 @@
             <input matInput autocomplete="off" formControlName="contacto">
             <mat-icon matSuffix>attach_money</mat-icon>
           </mat-form-field>
-  
+
           <mat-form-field appearance="outline">
             <mat-label>razonSocial</mat-label>
             <input matInput autocomplete="off" formControlName="razonSocial">
             <mat-icon matSuffix>attach_money</mat-icon>
           </mat-form-field>
-  
+
           <mat-form-field appearance="outline">
             <mat-label>idauditor</mat-label>
             <input matInput autocomplete="off" formControlName="idauditor">
             <mat-icon matSuffix>attach_money</mat-icon>
           </mat-form-field>
-  
+
           <mat-form-field appearance="outline">
             <mat-label>detalle</mat-label>
             <input matInput autocomplete="off" formControlName="detalle">
             <mat-icon matSuffix>attach_money</mat-icon>
           </mat-form-field>
-  
+
           <mat-form-field appearance="outline">
             <mat-label>Estado</mat-label>
             <mat-select formControlName="esActivo">
@@ -69,7 +73,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-       
+
       </mat-grid-tile>
     </mat-grid-list>
   </form>
@@ -77,6 +81,6 @@
 
 <mat-dialog-actions align="end">
   <button mat-raised-button mat-dialog-close color="warn">Volver</button>
-<!--<button mat-raised-button color="primary"[disabled]="formularioServicio.invalid"(click)="guardarEditar_Servicio()">{{botonAccion}}</button> -->
-  <button mat-raised-button color="primary"(click)="guardarEditar_Prospecto()">{{botonAccion}}</button>
+  <!--<button mat-raised-button color="primary"[disabled]="formularioServicio.invalid"(click)="guardarEditar_Servicio()">{{botonAccion}}</button> -->
+  <button mat-raised-button color="primary" (click)="guardarEditar_Prospecto()">{{botonAccion}}</button>
 </mat-dialog-actions>

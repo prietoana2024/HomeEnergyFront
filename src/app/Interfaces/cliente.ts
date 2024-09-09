@@ -7,13 +7,11 @@ export interface Cliente {
     contacto?: string,
     razonSocial?:string,
     idauditor?: number,
-    descripcionAuditor?:string,
     detalle?:string,
     esActivo?: number,
     fecha?:string,
-    idProspecto?: number,
-    descripcionProspecto?:string,
-    fechaRegistro:string
+    fechaRegistro?:string,
+    idProspecto?: number
 }
 /*{
   "idCotizacion": 0,

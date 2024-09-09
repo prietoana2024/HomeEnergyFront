@@ -37,6 +37,7 @@ export class HistorialVentaComponent implements OnInit,AfterViewInit {
     {value:"fecha",descripcion:"Por fechas"},
     {value:"numero",descripcion:"Numero Venta"}
   ]
+
   columnasTabla:string[]=['fechaRegistro','numeroDocumento','tipoPago','totalTexto','accion']
   dataInicio:Venta[]=[];
   datosListaVenta=new MatTableDataSource(this.dataInicio);

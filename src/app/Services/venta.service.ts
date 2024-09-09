@@ -23,4 +23,5 @@ export class VentaService {
   {
     return this.http.get<ResponseApi>(`${this.urlApi}Reporte?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`)
   }
+  //http://localhost:58372/api/Venta/Reporte?fechaInicio=11%2F02%2F2022&fechaFin=25%2F07%2F2024
 }

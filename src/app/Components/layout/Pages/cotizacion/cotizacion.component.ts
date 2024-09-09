@@ -69,6 +69,8 @@ export class CotizacionComponent implements OnInit, AfterViewInit{
   
   dataListaProspecto = new MatTableDataSource(this.dataInicio);
   @ViewChild(MatPaginator) paginacionTabla!: MatPaginator;
+
+  listaInicialProspectos:Prospecto[] = [];
   constructor(
 
     private dialog: MatDialog,
@@ -81,9 +83,10 @@ export class CotizacionComponent implements OnInit, AfterViewInit{
 
     this._prospectoServicio.lista().subscribe({
       next:(data)=>{
-        if(data.status)
+        if(data.status){
         this.listaProspectos=data.value;
-      
+        this.listaInicialProspectos=this.listaProspectos;
+        }
       },
       error:(e)=>{}
     });
@@ -110,6 +113,7 @@ export class CotizacionComponent implements OnInit, AfterViewInit{
         if (data.status) {
           this.dataListaProspecto.data = data.value;
           console.log(this.dataListaProspecto);
+          
         } else
           this._utilidadServicio.mostrarAlerta("No se encontraron datos","Oops");
       },
@@ -155,13 +159,11 @@ export class CotizacionComponent implements OnInit, AfterViewInit{
   findMovie(){
     this.movieListObject=this.listaProspectos.filter(m=>m.nombre.toLowerCase().includes(this.movieToFind.toLowerCase()));
      console.log(this.movieListObject);
-     this.tarjetas=this.movieListObject;
+     this.listaProspectos=this.movieListObject;
   }
   resetListMovie(){
-    
-    this.movieListObject=this.listaProspectos;
     this.movieToFind="";
-    this.tarjetas=this.movieListObject;
+    this.listaProspectos=this.listaInicialProspectos;
   }
   trackByItems(index:number,listaProspectos:any):number{
     return listaProspectos.idProspecto;
@@ -169,7 +171,7 @@ export class CotizacionComponent implements OnInit, AfterViewInit{
   aplicarFiltro(movieToFind: Event) {
     this.movieListObject=this.listaProspectos.filter(m=>m.nombre.toLowerCase().includes(this.movieToFind.toLowerCase()));
     console.log(this.movieListObject);
-    this.tarjetas=this.movieListObject;
+    this.listaProspectos=this.movieListObject;
   }
   seleccionado(movieToFind: Event) {
 

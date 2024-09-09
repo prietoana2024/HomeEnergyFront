@@ -1,0 +1,101 @@
+<h2 mat-dialog-title>Convertir Prospecto en Cliente</h2>
+<mat-dialog-content style="height: 800px;width: 900px;">
+  <!-------------------COMPONENTE DE TARJETAS -->
+
+  <mat-card style="margin: 20px 40px 40px 40px">
+    <mat-card-content>
+      <div class="container">
+        <div class="barra-busqueda">
+          <div class="form-group mi-barra">
+            <input [(ngModel)]="movieToFind" type="text" class="form-control mr-3" id="inputBuscar"
+              placeholder="Buscar..." (keyup)="aplicarFiltro($event)" #input>
+          </div>
+          <button (click)="findMovie()" class="btn btn-primary mb-2 mr-2">Buscar</button>
+          <button (click)="resetListMovie()" class="btn btn-warn mb-2 mr-2">Reset</button>
+
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let item of tarjetas; trackBy:trackByItems; let i=index" class="col-12 m-3 p-0"
+          style="max-width: 340px;height:auto;">
+          <div class="row g-0 ">
+            <div class="col-md-4 columna">
+              <img src="./../../../../../assets/images/{{item.fachadaimg}}" class="rounded-start" alt="...">
+            </div>
+            <div class="col-md-6 texto-justificado">
+              <div class="card-body">
+                <h5 class="card-title">{{item.nombre}}</h5>
+                <p class="card-text">{{item.contacto}}</p>
+                <p class="card-text">{{item.direccion}}</p>
+              </div>
+            </div>
+            <!--<div class="col-md-1 mis-botones-ocultos" >
+                  <button class="mi-boton-mas" id="extra" (click)="activarBotones()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  -<div class="botones-ocultos" id="extra" [(ngModel)]="seleccion"  (click)="activarBotones()">
+                    -<button mat-raised-button (click)="duplicarProspecto()" >Duplicar</button>-->
+
+            <button mat-raised-button color="primary" (click)="convertirCrearCliente(item)">Convertir</button>
+
+          </div>
+        </div>
+        <!--<div *ngFor="let item of tarjetas; trackBy:trackByItems; let i=index" class="card col-12 m-3 p-0"
+          style="max-width: 340px;max-height:200px;">
+          <div class="row g-0 ">
+            <div class="col-md-4 columna">
+              <img src="./../../../../../assets/images/{{item.fachadaimg}}" class="rounded-start" alt="...">
+            </div>
+            <div class="col-md-6 texto-justificado">
+              <div class="card-body">
+                <h5 class="card-title">{{item.nombre}}</h5>
+                <p class="card-text">{{item.contacto}}</p>
+                <p class="card-text">{{item.direccion}}</p>
+              </div>
+            </div>
+          </div>
+        </div>------->
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <!------------------SEGUNDA CAJA DE CARDS-->
+  <mat-card style="margin: 20px 40px 40px 40px">
+    <mat-card-content>
+      <div class="row">
+        <div *ngFor="let item of listaProspectos; trackBy:trackByItems; let i=index" class="col-12 m-3 p-0"
+          style="max-width: 340px;height:auto;">
+          <div class="row g-0 ">
+            <div class="col-md-4 columna">
+              <img src="./../../../../../assets/images/{{item.fachadaimg}}" class="rounded-start" alt="...">
+            </div>
+            <div class="col-md-6 texto-justificado">
+              <div class="card-body">
+                <h5 class="card-title">{{item.nombre}}</h5>
+                <p class="card-text">{{item.contacto}}</p>
+                <p class="card-text">{{item.direccion}}</p>
+              </div>
+            </div>
+            <!--<div class="col-md-1 mis-botones-ocultos" >
+                <button class="mi-boton-mas" id="extra" (click)="activarBotones()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                -<div class="botones-ocultos" id="extra" [(ngModel)]="seleccion"  (click)="activarBotones()">
+                  -<button mat-raised-button (click)="duplicarProspecto()" >Duplicar</button>-->
+
+            <button mat-raised-button color="primary" (click)="convertirCrearCliente(item)">Convertir</button>
+
+          </div>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+  <!-----------TERMINA COMPONENTE DE TARJETAS-->
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+  <!--<button mat-raised-button color="primary"[disabled]="formularioServicio.invalid"(click)="guardarEditar_Servicio()">{{botonAccion}}</button> 
+  <button mat-raised-button color="primary" (click)="guardarEditar_Prospecto()">{{botonAccion}}</button>-->
+</mat-dialog-actions>

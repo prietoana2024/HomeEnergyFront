@@ -22,6 +22,11 @@ export class ModalProspectoComponent implements OnInit {
   movieToFind:string='';
   movieListObject:Prospecto[]=this.listaProspectos;
 
+  public prospectImage:any;
+  public previsualizacion:string;
+
+  imagenPrevia:string="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
+
   constructor(
     private modalActual:MatDialogRef<ModalProspectoComponent>,
     @Inject(MAT_DIALOG_DATA) public datosProspecto:Prospecto,
@@ -58,6 +63,7 @@ export class ModalProspectoComponent implements OnInit {
      next:(data)=>{
        if(data.status)
        this.listaProspectos=data.value;
+       
 
      },
      error:(e)=>{}
@@ -65,6 +71,9 @@ export class ModalProspectoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
+
     if(this.datosProspecto!=null){
       this.formularioProspecto.patchValue({
       nombre:this.datosProspecto.nombre,
@@ -76,9 +85,11 @@ export class ModalProspectoComponent implements OnInit {
       idauditor:this.datosProspecto.idauditor,
       detalle:this.datosProspecto.detalle,
       esActivo:this.datosProspecto.esActivo.toString()
-
       })
+
     }
+
+    
   }
  
   duplicar_Prospecto(){
@@ -135,6 +146,7 @@ export class ModalProspectoComponent implements OnInit {
       detalle:this.formularioProspecto.value.detalle,
       esActivo:parseInt(this.formularioProspecto.value.esActivo)
     }
+    this.imagenPrevia=_prospecto.url;
     if(this.datosProspecto==null){
 
      this._prospectoServicio.guardar(_prospecto).subscribe({
@@ -182,6 +194,16 @@ export class ModalProspectoComponent implements OnInit {
     this.movieListObject=this.listaProspectos.filter(m=>m.nombre.toLowerCase().includes(this.movieToFind.toLowerCase()));
     this.tarjetas=this.movieListObject;
   }
+  onChange(event:any){
+    let reader=new FileReader();
 
+    reader.readAsDataURL(event.target.files[0]);
+
+    reader.onload=()=>{
+    this.prospectImage=reader.result;
+   }
+
+  this.prospectImage=this.formularioProspecto.value.url;
+  }
   
 }

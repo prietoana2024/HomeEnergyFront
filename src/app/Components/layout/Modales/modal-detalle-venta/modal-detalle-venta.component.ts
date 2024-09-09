@@ -23,7 +23,7 @@ export class ModalDetalleVentaComponent implements OnInit {
   )
    {
     this.fechaRegistro=_venta.fechaRegistro!;
-    this.numeroDocumento==_venta.numeroDocumento!;
+    this.numeroDocumento=_venta.numeroDocumento!;
     this.tipoPago=_venta.tipoPago;
     this.total=_venta.totalTexto;
     this.detalleVenta=_venta.detalleVenta;

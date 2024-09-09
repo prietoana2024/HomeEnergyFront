@@ -1,0 +1,225 @@
+<form [formGroup]="usuariosForm" (ngSubmit)="registrarFecha()" style="justify-content: center;">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de Contrato</mat-label>
+    <input matInput autocomplete="off" formControlName="fecha" [matDatepicker]="picker1" />
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <div style="display: flex;">
+    <ul style="list-style: none;">
+      <li *ngFor="let hero of listaUsuarios">
+        <button [class.selected]="hero === selectedHero" style="border: none;
+    padding: 10px;" (click)="onSelect(hero)">
+          <span>{{hero.nombreCompleto}}</span>
+        </button>
+      </li>
+    </ul>
+
+    <ul style="list-style: none;">
+      <li *ngFor="let item of listaUsuariosAgregados">
+        <button type="button" style="border: none;
+   padding: 10px;color:#3f51b5" (click)="removeUser(item)">
+          <span>{{item.nombreCompleto}}</span>
+        </button>
+      </li>
+    </ul>
+
+  </div>
+  <button type="button" (click)="deleteSelect()">Set</button>
+
+  <button type="submit"> Crear</button>
+</form>
+
+<!-----Componente adicionado-->
+
+<!-------------------COMPONENTE DE TARJETAS -->
+
+<mat-card style="margin: 20px 40px 40px 40px">
+  <mat-card-content>
+    <div class="container">
+      <div class="barra-busqueda">
+        <div class="form-group mi-barra">
+          <input [(ngModel)]="movieToFindParaUsuarios" type="text" class="form-control mr-3" id="inputBuscar"
+            placeholder="Buscar..." (keyup)="aplicarFiltro($event)" #input>
+        </div>
+        <button (click)="findMovie()" class="btn btn-primary mb-2 mr-2">Buscar</button>
+        <button (click)="resetListMovie()" class="btn btn-warn mb-2 mr-2">Reset</button>
+
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let item of tarjetasParaUsuarios; trackBy:trackByItems; let i=index" class="card col-12 m-3 p-0"
+        style="max-width: 340px;">
+        <div class="row g-0 ">
+          <div class="col-md-4 columna">
+            <img src="./../../../../../assets/images/{{item.fachadaimg}}" class="rounded-start" alt="...">
+          </div>
+          <div class="col-md-6 texto-justificado">
+            <div class="card-body">
+              <h5 class="card-title">{{item.nombre}}</h5>
+              <p class="card-text">{{item.contacto}}</p>
+              <p class="card-text">{{item.direccion}}</p>
+            </div>
+          </div>
+          <!---------COMPONENTE DE EXPANSION-->
+          <mat-expansion-panel hideToggle style="border: none;">
+            <mat-expansion-panel-header style="background-color: #3f51b5;">
+              <mat-panel-title style="justify-content: center;">
+                <button mat-raised-button color="primary">
+                  <mat-icon mat-list-icon>add</mat-icon>Convertir en cliente
+                </button></mat-panel-title>
+              <!---- <mat-panel-description> This is a summary of the content </mat-panel-description>-->
+            </mat-expansion-panel-header>
+            <!------------------SEGUNDO FORMULARIO DE USUARIOS--->
+            <form [formGroup]="usuariosForm" (ngSubmit)="registrarFecha()" style="justify-content: center;">
+
+              <mat-form-field appearance="fill">
+                <mat-label>Fecha de Contrato</mat-label>
+                <input matInput autocomplete="off" formControlName="fecha" [matDatepicker]="picker1" />
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+
+              <div style="display: flex;">
+                <ul style="list-style: none;">
+                  <li *ngFor="let hero of listaUsuarios">
+                    <button [class.selected]="hero === selectedHero" style="border: none;
+                padding: 10px;" (click)="onSelect(hero)">
+                      <span>{{hero.nombreCompleto}}</span>
+                    </button>
+                  </li>
+                </ul>
+
+                <ul style="list-style: none;">
+                  <li *ngFor="let item of listaUsuariosAgregados">
+                    <button type="button" style="border: none;
+               padding: 10px;color:#3f51b5" (click)="removeUser(item)">
+                      <span>{{item.nombreCompleto}}</span>
+                    </button>
+                  </li>
+                </ul>
+
+              </div>
+            </form>
+
+            <!----------------AQUI VA EL COMPONENTE CREADO-->
+            <mat-action-row>
+              <div>
+                <button (click)="deleteSelect()"
+                  style="padding: 10px; background-color: #f0f0f0; border: none; font-family: Roboto; font-size: 14px; color:rgb(0, 0, 0);font-weight:500;border-radius: 5px;">Reestablecer</button>
+                <!-------- <button type="submit" mat-raised-button color="primary">Convertir</button>------>
+                <button type="button" (click)="convertirCrear(item)">Convertir 2</button>
+              </div>
+
+            </mat-action-row>
+          </mat-expansion-panel>
+          <!---------COMPONENTE DE EXPANSION
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header style="background-color: #3f51b5;">
+              <mat-panel-title style="justify-content: center;">
+                <button mat-raised-button color="primary">
+                  <mat-icon mat-list-icon>add</mat-icon>Convertir en cliente
+                </button></mat-panel-title>-------->
+
+          <!---- 
+            </mat-expansion-panel-header>
+
+            <mat-action-row>
+              <button mat-button>Convertir</button>
+            </mat-action-row>
+          </mat-expansion-panel>--------->
+          <!---------TERMINA COMPONENTE DE EXPANSION-->
+          <!--<div class="col-md-1 mis-botones-ocultos" >
+                <button class="mi-boton-mas" id="extra" (click)="activarBotones()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                -<div class="botones-ocultos" id="extra" [(ngModel)]="seleccion"  (click)="activarBotones()">
+                  -<button mat-raised-button (click)="duplicarProspecto()" >Duplicar</button>-->
+
+          <!--<button mat-raised-button color="accent" (click)="administrar(item)">Eliminar</button>-->
+
+        </div>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+<!------------------SEGUNDA CAJA DE CARDS-->
+<mat-card style="margin: 20px 40px 40px 40px">
+  <mat-card-content>
+    <div class="row">
+      <div *ngFor="let item of listaProspectosParaUsuarios; trackBy:trackByItems; let i=index" class="col-12 m-3 p-0"
+        style="max-width: 340px;height:auto;">
+        <div class="row g-0 ">
+          <div class="col-md-4 columna">
+            <img src="./../../../../../assets/images/{{item.fachadaimg}}" class="rounded-start" alt="...">
+          </div>
+          <div class="col-md-6 texto-justificado">
+            <div class="card-body">
+              <h5 class="card-title">{{item.nombre}}</h5>
+              <p class="card-text">{{item.contacto}}</p>
+              <p class="card-text">{{item.direccion}}</p>
+            </div>
+          </div>
+          <!---------COMPONENTE DE EXPANSION-->
+          <mat-expansion-panel hideToggle style="border: none;">
+            <mat-expansion-panel-header style="background-color: #3f51b5;">
+              <mat-panel-title style="justify-content: center;">
+                <button mat-raised-button color="primary">
+                  <mat-icon mat-list-icon>add</mat-icon>Convertir en cliente
+                </button></mat-panel-title>
+              <!---- <mat-panel-description> This is a summary of the content </mat-panel-description>-->
+            </mat-expansion-panel-header>
+            <!------------------SEGUNDO FORMULARIO DE USUARIOS-->
+            <form [formGroup]="usuariosForm" (ngSubmit)="registrarFecha()" style="justify-content: center;">
+
+              <mat-form-field appearance="fill">
+                <mat-label>Fecha de Contrato</mat-label>
+                <input matInput autocomplete="off" formControlName="fecha" [matDatepicker]="picker1" />
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+
+              <div style="display: flex;">
+                <ul style="list-style: none;">
+                  <li *ngFor="let hero of listaUsuarios">
+                    <button [class.selected]="hero === selectedHero" style="border: none;
+                padding: 10px;" (click)="onSelect(hero)">
+                      <span>{{hero.nombreCompleto}}</span>
+                    </button>
+                  </li>
+                </ul>
+
+                <ul style="list-style: none;">
+                  <li *ngFor="let item of listaUsuariosAgregados">
+                    <button type="button" style="border: none;
+               padding: 10px;color:#3f51b5" (click)="removeUser(item)">
+                      <span>{{item.nombreCompleto}}</span>
+                    </button>
+                  </li>
+                </ul>
+
+              </div>
+            </form>
+
+            <!--------------AQUI VA EL COMPONENTE CREADO-->
+            <mat-action-row>
+              <div>
+                <button (click)="deleteSelect()"
+                  style="padding: 10px; background-color: #f0f0f0; border: none; font-family: Roboto; font-size: 14px; color:rgb(0, 0, 0);font-weight:500;border-radius: 5px;">Reestablecer</button>
+                <button type="submit" mat-raised-button color="primary">Convertir</button>
+                <button type="button" (click)="convertirCrear(item)">Convertir 2</button>
+              </div>
+
+            </mat-action-row>
+          </mat-expansion-panel>
+
+        </div>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+<!-----------TERMINA COMPONENTE DE TARJETAS-->

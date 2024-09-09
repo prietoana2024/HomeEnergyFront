@@ -64,13 +64,13 @@
         <!---<button mat-icon-button color="primary" (click)="editarProspecto(element)" >
           <mat-icon>edit</mat-icon>
         </button>--->
-        <button mat-icon-button color="danger" (click)="uploadImage(element.idProspecto,element.url)" >
+        <button mat-icon-button color="danger" (click)="uploadImage(element.idProspecto,element.url)">
           <mat-icon>save</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="removeImage(element.idProspecto,element.nombre)" >
+        <button mat-icon-button color="warn" (click)="removeImage(element.idProspecto,element.nombre)">
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="loadingImage()" >
+        <button mat-icon-button color="warn" (click)="loadingImage()">
           <mat-icon>edit</mat-icon>
         </button>
       </td>
@@ -82,63 +82,3 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
   </mat-paginator>
 </div>
-<!----
-<form [formGroup]="formularioProspecto">
-
-  <mat-form-field appearance="outline">
-    <mat-label>Nombre</mat-label>
-    <input matInput autocomplete="off" formControlName="nombre" placeholder="nombre">
-    <mat-icon matSuffix>fit_screen</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>fachadaimg</mat-label>
-    <input matInput autocomplete="off" formControlName="fachadaimg">
-    <mat-icon matSuffix>fit_screen</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>url</mat-label>
-    <img src="">
-    <input matInput autocomplete="off"  formControlName="url">
-    <mat-icon matSuffix>attach_money</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>direccion</mat-label>
-    <input matInput autocomplete="off" formControlName="direccion">
-    <mat-icon matSuffix>attach_money</mat-icon>
-  </mat-form-field>
-  
-  <mat-form-field appearance="outline">
-    <mat-label>contacto</mat-label>
-    <input matInput autocomplete="off" formControlName="contacto">
-    <mat-icon matSuffix>attach_money</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>razonSocial</mat-label>
-    <input matInput autocomplete="off" formControlName="razonSocial">
-    <mat-icon matSuffix>attach_money</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>idauditor</mat-label>
-    <input matInput autocomplete="off" formControlName="idauditor">
-    <mat-icon matSuffix>attach_money</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>detalle</mat-label>
-    <input matInput autocomplete="off" formControlName="detalle">
-    <mat-icon matSuffix>attach_money</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Estado</mat-label>
-    <mat-select formControlName="esActivo">
-      <mat-option value="1">Activo</mat-option>
-      <mat-option value="0">No activo</mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>---->

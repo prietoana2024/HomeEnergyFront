@@ -1,44 +1,59 @@
-
-<h1 style="margin: 20px 0px 0px 40px">Prospecto</h1>
-
+<!-- AQUIN EMPIEZA LA SECCION DE PRUEBA CON PROSPECTOS--->
 <mat-card style="margin: 20px 40px 40px 40px">
-  <mat-card-title>
-    <button mat-raised-button color="primary" (click)="nuevoProspecto()">
-      <mat-icon mat-list-icon>add</mat-icon>Nuevo prospecto
-    </button>
-  </mat-card-title>
+  <mat-card-title style="margin: 20px 40px 40px 40px">Crear Cotización</mat-card-title>
+  <mat-card-content>
+    <div class="container">
+      <div class="barra-busqueda">
+        <mat-form-field>
+          <mat-label>Seleccionar</mat-label>
+          <mat-select [(ngModel)]="movieToFind">
+            <mat-option *ngFor="let item of listaProspectos" [value]="item.nombre"
+              (click)="findMovie()">{{item.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="form-group mi-barra">
+          <input [(ngModel)]="movieToFind" type="text" class="form-control mr-3" id="inputBuscar"
+            placeholder="Buscar..." (keyup)="aplicarFiltro($event)" #input>
+        </div>
+        <button (click)="resetListMovie()" class="btn btn-warn mb-2 mr-2"><mat-icon>restart_alt</mat-icon></button>
 
-  <mat-divider></mat-divider>
+      </div>
+    </div>
 
-  <mat-card-content class="dashboard-card-content">
-    
-    <div class="row m-0 d-flex justify-content-center flex-wrap">
-      <div *ngFor="let t of listaTarjetas; let i=index" class="card col-12 m-3 p-0" style="max-width: 940px;">
+  </mat-card-content>
+</mat-card>
+<!------------------SEGUNDA CAJA DE CARDS-->
+<mat-card style="margin: 20px 40px 40px 40px">
+  <mat-card-content>
+    <div class="row">
+      <div *ngFor="let item of listaProspectos; trackBy:trackByItems; let i=index" class="card col-12 m-3 p-0"
+        style="max-width: 340px;max-height:200px;">
         <div class="row g-0 ">
-          <div class="col-md-8 columna">
-            <img  src="./../../../../../assets/images/{{t.fachadaimg}}" class="rounded-start imagen-cover" alt="...">
+          <div class="col-md-4 columna">
+            <img src="./../../../../../assets/images/{{item.fachadaimg}}" class="rounded-start" alt="...">
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6 texto-justificado">
             <div class="card-body">
-              <h3 class="card-title">Propuesta para:</h3>
-              <h5 class="card-title">{{t.nombre}}</h5>
-              <p class="card-text">{{t.direccion}}</p>
-              <h3 class="card-title">Contácto</h3>
-              <h5 class="card-title">{{t.razonSocial}}</h5>
-              <p class="card-text">{{t.contacto}}</p>
-              <h3 class="card-title">Energy Auditor</h3>
-              <h5 class="card-title">{{t.idauditor}}</h5>
-              
-              <p class="card-text text-center"><small class="text-body-secondary">{{i}}</small></p>
-    
+              <h5 class="card-title">{{item.nombre}}</h5>
+              <p class="card-text">{{item.contacto}}</p>
+              <p class="card-text">{{item.direccion}}</p>
             </div>
           </div>
+          <button mat-raised-button color="primary" (click)="openDetails1(item)">
+            <mat-icon mat-list-icon>add</mat-icon>Nuevo prospecto
+          </button>
+          <!--<div class="col-md-1 mis-botones-ocultos" >
+              <button class="mi-boton-mas" id="extra" (click)="activarBotones()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              -<div class="botones-ocultos" id="extra" [(ngModel)]="seleccion"  (click)="activarBotones()">
+                -<button mat-raised-button (click)="duplicarProspecto()" >Duplicar</button>-->
+
+          <!--<button mat-raised-button color="accent" (click)="administrar(item)">Eliminar</button>-->
+
         </div>
       </div>
     </div>
-    <p class="card-text text-center"><small class="text-body-secondary">Los datos ingresados son suministrados para propositos administrativos  y utilizados estrictamente por HOME ENERGY </small></p>
-    
-    
 
   </mat-card-content>
 </mat-card>

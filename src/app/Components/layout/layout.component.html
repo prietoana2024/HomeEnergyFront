@@ -1,126 +1,38 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <h1>Home Energy System</h1>
-
-        <button mat-icon-button (click)="sidenav.toggle();">
-            <mat-icon>menu</mat-icon>
-        </button>
-    </mat-toolbar-row>
-</mat-toolbar>
-
-<mat-sidenav-container>
-    <mat-sidenav #sidenav opened="true" mode="side" style="width:200px">
+<mat-sidenav-container style="background: #40c3ffab;">
+    <mat-sidenav #sidenav opened="true" mode="side"
+        style="width:250px;opacity: 1;background: rgba(243, 251, 254, 0.578);padding: 15px;">
         <mat-nav-list>
-
-            <mat-list-item routerLink="/pages/dashboard">
-                <mat-icon mat-list-icon>dashboard</mat-icon>
-                <div mat-line>DashBoard</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/usuarios">
-                <mat-icon mat-list-icon>group</mat-icon>
-                <div mat-line>Usuarios</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/servicios">
-                <mat-icon mat-list-icon>collections_bookmark</mat-icon>
-                <div mat-line>Servicios</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/estado">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Estados</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/biblioteca">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>biblioteca</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/prospectos">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Prospectos</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/clientes">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Clientes</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/cotizacion">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Cotizacion</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/mis-cotizaciones">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Mis Cotizaciones</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/venta">
-                <mat-icon mat-list-icon>currency_exchange</mat-icon>
-                <div mat-line>Venta</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/historial_venta">
-                <mat-icon mat-list-icon>edit_note</mat-icon>
-                <div mat-line>Historial Ventas</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/reportes">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Reportes</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/simulacion">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Simulacion</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/financiamiento">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Financiamiento</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/bar-chart">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Charts</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/upload">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Upload</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/prospecto-img">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Mis nuevos prospectos</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/validators">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Validators</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/file">
-                <mat-icon mat-list-icon>file</mat-icon>
-                <div mat-line>file</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/pdf1">
-                <mat-icon mat-list-icon>pdf</mat-icon>
-                <div mat-line>pdf</div>
-            </mat-list-item>
-
-            <mat-list-item routerLink="/pages/cotizacionCompleta">
-                <mat-icon mat-list-icon>receipt</mat-icon>
-                <div mat-line>Cotizacion Completa</div>
+            <a href=" https://ibb.co/BrTMfkK">
+                <img src="https://i.ibb.co/9Vy5pP3/Logo-Fondo-Blanco-Mesa-de-trabajo-1.png"
+                    alt="Logo-Fondo-Blanco-Mesa-de-trabajo-1" border="0" style="width: 100%;padding-bottom: 10px;">
+            </a>
+            <mat-list-item *ngFor="let menu of listaMenus" [routerLink]="menu.url" style="color:#334D6E">
+                <mat-icon mat-list-icon>{{menu.icono}}</mat-icon>
+                <div mat-line>{{menu.nombre}}</div>
             </mat-list-item>
 
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
+        <div style="display: flex;
+        flex-direction: row;
+        align-content: space-around;
+        justify-content: space-around;
+        align-items: center;margin-top: 10px;">
+            <button mat-icon-button (click)="sidenav.toggle();" style="color:#fff">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span style="flex:1 1 auto;"></span>
+            <label style="font-size: 14px;margin-right: 20px;margin: top 20px;color:#fff">
+                {{correoUsuario}} || {{rolUsuario}}
+            </label>
+
+            <button mat-icon-button (click)="cerrarSesion()">
+                <mat-icon style="color:#fff">logout</mat-icon>
+            </button>
+        </div>
         <div style="height:90vh;">
+
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

@@ -7,4 +7,5 @@ export interface Reporte {
     cantidad: number,
     precio: string,
     total: string
+
 }
