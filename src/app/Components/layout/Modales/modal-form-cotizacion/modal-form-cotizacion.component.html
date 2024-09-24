@@ -1,0 +1,616 @@
+<mat-dialog-content style="min-height: 100%;">
+  <mat-tab-group headerPosition="below">
+    <mat-tab label="PRESENTATION">
+      <div style="display: flex;
+      min-height: 90%;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: space-around;
+      justify-content: space-around;
+      align-items: center;">
+        <div style="width: 70%;min-height:800px;">
+          <img src="../../../../../assets/images/{{itemProspecto.fachadaimg}}" class="img-fluid rounded-start"
+            alt="...">
+        </div>
+        <div style="width: 30%;">
+          <h1 class="montserratFont">PROPUESTA PARA:</h1>
+          <h3 class="card-title ">Nombres y apellidos</h3>
+          <h3 class="subtitle">{{itemProspecto.nombre}}</h3>
+          <h3 class="card-title ">Dirección</h3>
+          <h3 class="card-title ">{{itemProspecto.direccion}}</h3>
+          <h3 class="card-title ">Contácto</h3>
+          <h3 class="card-title ">{{itemProspecto.contacto}}</h3>
+          <h3 class="card-title ">Razón Social</h3>
+          <h3 class="card-title ">{{itemProspecto.razonSocial}}</h3>
+          <h3 class="card-title">Auditor</h3>
+          <h3 class="card-title">{{itemProspecto.idauditor}}</h3>
+          <h3 class="card-title">Notas</h3>
+          <h3 class="card-title">{{itemProspecto.detalle}}</h3>
+          <p class="card-text"><small class="text-body-secondary">Los datos personales son tratados de forma
+              confidencial y utilizados solo por HOME ENERGY</small></p>
+          <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="SERVICIOS">
+
+
+      <form [formGroup]="formularioCotizacion" style="max-height: 800px;min-height: 800px;width: 100%;">
+        <div>
+
+          <mat-form-field style="width: 100%;font-family: 'Montserrat';
+              font-weight: 500;
+                border-radius: 15px;
+                height: 100px;
+                border-color: #00e5ff;
+                background: transparent;
+                font-size: 25px;
+                font-weight: 500;
+                color: #0d47a1;">
+            <mat-label style="font-family: 'Montserrat';
+                font-weight: 500;
+                  border-radius: 15px;
+                  height: 100px;
+                  border-color: #00e5ff;
+                  background: transparent;
+                  font-size: 25px;
+                  font-weight: 500;
+                  color: #0d47a1;">Ingrese las p2 de la propiedad</mat-label>
+            <input matInput autocomplete="off" type="number" formControlName="Pulgadas2" style="width: 100%;
+                border-radius: 15px;
+                height: 50px;
+                border-color: #00e5ff;
+                background: transparent;
+                font-size: 25px;
+                font-family: 'Roboto';
+                font-weight: 500;
+                color: #0d47a1; text-align: center;">
+            <mat-icon matSuffix>start</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div *ngFor="let item of listaServicios" style="justify-content: center;text-align: center;">
+
+          <input type="text" style="width: 40%;
+              border-radius: 15px;
+              height: 50px;
+              border-color: #00e5ff;
+              background: transparent;
+              font-size: 25px;
+              font-family: 'Roboto';
+              font-weight: 500;
+              color: #0d47a1; text-align: center;" name="" id="" value="{{item.nombre}}">
+          <input type="text" style="width: 40%;
+              border-radius: 15px;
+              height: 50px;
+              border-color: #00e5ff;
+              background: transparent;
+              font-size: 25px;
+              font-family: 'Roboto';
+              font-weight: 500;
+              color: #0d47a1; text-align: center;" name="" id="" value="{{item.precio}}">
+          <button (click)="servicioParaVenta(item)" style="
+              height: 50px;
+              border: none;
+              background: transparent;
+              font-size: 25px;
+              font-family: 'Montserrat';
+              font-weight: 700;
+              color: #0d47a1;"> <mat-icon matSuffix>library_add</mat-icon></button>
+        </div>
+
+        <div style="display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: space-around;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 10px;background:#00e5ff">
+          <mat-form-field class="full-width" style="border: none;color: #0d47a1;">
+            <mat-label style="font-size: 20px;
+                font-family: 'Montserrat';
+                font-weight: 400;
+                color: #0d47a1;">Tipo de Pago</mat-label>
+            <mat-select style="font-size: 20px;
+                font-family: 'Montserrat';
+                font-weight: 400;
+                color: #0d47a1;" [(value)]="tipodePagoPorDefecto">
+              <mat-option style="font-size: 20px;
+                  font-family: 'Montserrat';
+                  font-weight: 400;
+                  color: #0d47a1;" value="CONTADO">Contado</mat-option>
+              <mat-option value="TARJETA">Tarjeta</mat-option>
+              <mat-option value="CUOTAS">A cuotas sin inicial</mat-option>
+              <mat-option value="CUOTASINICIAL15">Cuotas con Inicial del 15%</mat-option>
+              <mat-option value="CUOTASINICIAL25">Cuotas con Inicial del 25%</mat-option>
+              <mat-option value="CUOTASINICIAL35">Cuotas con Inicial del 35%</mat-option>
+              <mat-option value="CUOTASINICIAL45">Cuotas con Inicial del 45%</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button style="width: auto;
+              border-radius: 15px;
+              height: auto;
+              border-color:#0d47a1;;
+              background: transparent;
+              color: #0d47a1;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              align-items: center;
+              font-size: 10px;
+          " (click)="validarTipoPago()"><mat-icon matSuffix>cached</mat-icon>
+            <p style="color: #0d47a1;">Validar tipo de pago</p>
+          </button>
+          <button mat-raised-button color="warn" style="height: 60px;" (click)="resetTotalPagar()">reset
+          </button>
+          <div>
+            <mat-form-field style="font-size: 20px;
+                font-family: 'Montserrat';
+                font-weight: 400;
+                color: #0d47a1;">
+              <mat-label>Pago Inicial</mat-label>
+              <input matInput autocomplete="off" formControlName="PagoInicialTexto" value="{{inicial}}">
+              <mat-icon matSuffix>attach_money</mat-icon>
+            </mat-form-field>
+
+
+
+            <!----- <mat-form-field appearance="outline">
+                    <mat-label>Total</mat-label>
+                    <input matInput autocomplete="off" formControlName="TotalTexto">
+                    <mat-icon matSuffix>attach_money</mat-icon>
+                  </mat-form-field>
+          
+          --->
+
+            <mat-form-field style="font-size: 20px;
+                font-family: 'Montserrat';
+                font-weight: 400;
+                color: #0d47a1;">
+              <mat-label>Total</mat-label>
+              <input matInput autocomplete="off" formControlName="TotalTexto" value="{{totalPagar}}">
+              <mat-icon matSuffix>attach_money</mat-icon>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <h1 style="  font-family: Roboto;
+            font-weight: 300;
+            color: #0d47a1;">Resumen</h1>
+
+        <div style="display: flex;
+            font-size: 25px;
+            font-family: Roboto;
+            font-weight: 300;
+            color: #0d47a1;">
+          <h1 style="width: 5%;">ID</h1>
+          <h1 style="width: 40%;">SERVICIO</h1>
+          <h1 style="width: 5%;">P2</h1>
+          <h1 style="width: 25%;">VALOR</h1>
+          <h1 style="width: 25%;">SUBTOTAL</h1>
+        </div>
+        <div *ngFor="let item of listaServiciosParaVenta" style="display: flex;
+            font-size: 25px;
+            font-family: Roboto;
+            font-weight: 300;
+            color: #0d47a1;">
+          <h1 style="width: 5%;">{{item.idServicio}}</h1>
+          <h1 style="width: 40%;">{{item.descripcionServicio}}</h1>
+          <h1 style="width: 5%;">{{item.cantidad}}</h1>
+          <h1 style="width: 25%;">{{item.precioTexto}}</h1>
+          <h1 style="width: 25%;">{{item.totalTexto}}</h1>
+          <button mat-icon-button color="warn" (click)="eliminarServicio(item)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <div style="padding-left: 70%;">
+          <h1 style="display: flex;
+            font-size: 25px;
+            font-family: Roboto;
+            font-weight: 500;
+            color: #0d47a1;text-align: right;">TOTAL: {{totalPagar}} $</h1>
+        </div>
+      </form>
+    </mat-tab>
+    <mat-tab label="FINANCING">
+      <div style="width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: space-around;
+      justify-content: space-around;
+      align-items: center;min-height: 800px;">
+
+        <div id="canvas" style="width: 80%;">
+          <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="data" [gradient]="gradient"
+            [legend]="showLegend" [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)"
+            (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+          </ngx-charts-pie-chart>
+        </div>
+        <div class="boxButtonsFinancing">
+          <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="totalPagar">
+          <h3 class="subtitleFinancing">TOTAL A PAGAR</h3>
+          <input class="inputTotal" type="text" [(ngModel)]="totalPagarTxt">
+          <button class="buttonFive" type="button" (click)="operacionFive()">5 Años</button>
+          <button class="buttonFive" type="button" (click)="operacionTeen()">10 Años</button>
+          <button class="buttonFive" type="button" (click)="operacionTweetyFive()">15 Años</button>
+          <h3 class="subtitleFinancing">AHORRA</h3>
+          <input class="inputTotal" type="text" [(ngModel)]="totalPagarTxt">
+          <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="totalInteres">
+          <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="interesxMes">
+          <h3 class="subtitleFinancing">VALOR A CANCELAR POR INTERESES</h3>
+          <input class="inputTotal" type="text" [(ngModel)]="totalInteresTxt">
+          <h3 class="subtitleFinancing">CUOTA MENSUAL</h3>
+          <input class="inputTotal" type="text" [(ngModel)]="interesxMesTxt">
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="SOLAR">
+      <div style="display: flex;min-height: 90%;">
+        <div style="width: 50%;padding-left: 20px;padding-right: 20px;min-height: 800px;">
+
+          <h1 class="montserratFont">COMPARACIÓN EE & ES</h1>
+          <h3 class="subtitleFinancing">ENERGIA ELÉCTRICA</h3>
+          <h5 class="subtitleFinancing">PAGO MENSUAL</h5>
+          <input class="inputTotal" type="text" [(ngModel)]="facturaEE">
+          <h5 class="subtitleFinancing">% INCREMENTO ANUAL</h5>
+          <input class="inputTotal" type="number" [(ngModel)]="porcentajeIA">
+          <section class="cajaProyeccion">
+            <div class="ustedPagara" style="margin-top: 20px;margin-bottom: 20px;">PROYECCIÓN</div>
+            <h5 class="subtitleFinancing">MENSUALIDADES APROXIMADAS:</h5>
+            <input class="inputTotal" type="text" [(ngModel)]="cuotasMensualesEETxt">
+            <h5 class="subtitleFinancing">HABRÁ CANCELADO ALREDEDOR DE :</h5>
+            <input class="inputTotal" type="text" [(ngModel)]="totalPagosAnualesTxt">
+          </section>
+        </div>
+        <div class="contenedorSolar" style="width: 50%;padding-left: 20px;padding-right: 20px;">
+          <div class="cajaSolar">
+            <h3 class="subtitleFinancing">ENERGÍA SOLAR</h3>
+            <input class="inputTotal" [(ngModel)]="cuotasMensualesES">
+          </div>
+          <button class="inputSolar" type="button" (click)="calcularCuotas()">10 Años</button>
+          <button class="inputSolar" type="button" (click)="calcularCuotas15()">15 Años</button>
+          <button class="inputSolar" type="button" (click)="calcularCuotas30()">30 Años</button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="CONTRATO" style="max-width: 100%;">
+      <div style="min-height: 800px;">
+        <h2>RELEASE OF REABILITY</h2>
+        <div style="display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-content: space-around;
+      justify-content: space-around;
+      align-items: center;height: 700px;">
+          <textarea class="montserratFont" [(ngModel)]='myTextarea' rows="30" cols="100%" style="width: 100%;">
+        </textarea>
+        </div>
+      </div>
+      <!--------<p>The value of the textarea field is: {{myTextarea}}"</p>------>
+    </mat-tab>
+    <!------empieza ultimo
+    -->
+    <mat-tab label="CONFIRMAR" style="max-width: 100%;">
+      <div style="min-height: 800px;">
+        <h3 class="subtitleFinancing">COMPLETAR LOS CAMPOS</h3>
+        <div style="display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-content: space-around;
+          justify-content:flex-start;
+          align-items: center;padding: 30px;">
+          <div style="font-size: 20px;
+            font-family: Montserrat;
+            font-weight: 400;
+            color: #0d47a1;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: stretch;padding-right: 20px;">
+            <mat-label>Email</mat-label>
+            <input style="border-radius: 15px;
+                height: 50px;
+                border-color: #00e5ff;
+                background: transparent;" [(ngModel)]="email" type="email">
+          </div>
+          <div style="font-size: 20px;
+            font-family: 'Montserrat';
+            font-weight: 400;
+            color: #0d47a1;width: 50%;padding-left: 20px;">
+            <mat-label>Tamaño del sistema</mat-label>
+            <div style="display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              justify-content: flex-start;
+              align-items: center;">
+              <mat-select style="font-size: 20px;
+                    font-family: 'Montserrat';
+                    font-weight: 400;
+                    color: #0d47a1;" [(value)]="tamanoSistema">
+                <mat-option value="MICRO">MICRO</mat-option>
+                <mat-option value="MEDIANO">MEDIANO</mat-option>
+                <mat-option value="GRANDE">GRANDE</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>source_environment</mat-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-------------------SEPARADOR-->
+        <div style="display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-content: space-around;
+          justify-content:flex-start;
+          align-items: center;padding: 30px;">
+          <div style="font-size: 20px;
+          font-family: 'Montserrat';
+            font-weight: 400;
+            color: #0d47a1;width: 50%;padding-right: 20px;">
+            <mat-label style="font-size: 20px;
+              font-family: 'Montserrat';
+              font-weight: 400;
+              color: #0d47a1;">Tipo de Identificacion</mat-label>
+            <mat-select style="font-size: 20px;
+                    font-family: 'Montserrat';
+                    font-weight: 400;
+                    color: #0d47a1;" [(value)]="tipoIdentificacion">
+              <mat-option style="font-size: 20px;
+                      font-family: 'Montserrat';
+                      font-weight: 400;
+                      color: #0d47a1;" value="CC">CEDULA DE CIUDADANIA</mat-option>
+              <mat-option value="PS">PASSPORT</mat-option>
+              <mat-option value="PE">PERMISO</mat-option>
+              <mat-option value="RE">REGISTER</mat-option>
+            </mat-select>
+          </div>
+          <div style="font-size: 20px;
+            font-family: 'Montserrat';
+            font-weight: 400;
+            color: #0d47a1;width: 50%;display: flex;flex-direction: column;
+        justify-content: space-around;
+        align-items: stretch;padding-left: 20px;">
+            <mat-label>Identificación</mat-label>
+            <input style="border-radius: 15px;
+                height: 50px;
+                border-color: #00e5ff;
+                background: transparent;" type="number" [(ngModel)]="identificacion">
+          </div>
+        </div>
+        <!---------TRMINA SEPARADOR-->
+        <div style="display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-content: space-around;
+          justify-content:flex-start;
+          align-items: center;padding: 30px;">
+          <div style="font-size: 20px;
+            font-family: Montserrat;
+            font-weight: 400;
+            color: #0d47a1;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: stretch;padding-right: 20px;">
+            <mat-label>SocEin</mat-label>
+            <input style="border-radius: 15px;
+                height: 50px;
+                border-color: #00e5ff;
+                background: transparent;" [(ngModel)]="socEin" type="number">
+          </div>
+          <div style="font-size: 20px;
+            font-family: Montserrat;
+            font-weight: 400;
+            color: #0d47a1;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: stretch;padding-left: 20px;">
+            <mat-label>Notas</mat-label>
+            <input style="border-radius: 15px;
+                height: 50px;
+                border-color: #00e5ff;
+                background: transparent;" [(ngModel)]="notas" type="text">
+          </div>
+        </div>
+
+        <!---------TRMINA SEPARADOR-->
+        <div style="display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-content: space-around;
+          justify-content:flex-start;
+          align-items: center;padding: 30px;">
+          <div style="font-size: 20px;
+          font-family: Montserrat;
+          font-weight: 400;
+          color: #0d47a1;
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: stretch;padding-right: 20px;">
+            <mat-label>Url 1</mat-label>
+            <input style="border-radius: 15px;
+              height: 50px;
+              border-color: #00e5ff;
+              background: transparent;" [(ngModel)]="url1" type="text">
+          </div>
+          <div style="font-size: 20px;
+            font-family: Montserrat;
+            font-weight: 400;
+            color: #0d47a1;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: stretch;padding-left: 20px;">
+            <mat-label>Url 2</mat-label>
+            <input style="border-radius: 15px;
+                height: 50px;
+                border-color: #00e5ff;
+                background: transparent;" [(ngModel)]="url2" type="text">
+          </div>
+        </div>
+        <!---------TRMINA SEPARADOR-->
+        <div style="display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-content: space-around;
+          justify-content:flex-start;
+          align-items: center;padding: 30px;">
+          <div style="font-size: 20px;
+          font-family: Montserrat;
+          font-weight: 400;
+          color: #0d47a1;
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: stretch;padding-right: 20px;">
+            <mat-label>Url 3</mat-label>
+            <input style="border-radius: 15px;
+              height: 50px;
+              border-color: #00e5ff;
+              background: transparent;" [(ngModel)]="url3" type="text">
+          </div>
+          <div style="font-size: 20px;
+            font-family: Montserrat;
+            font-weight: 400;
+            color: #0d47a1;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: stretch;padding-left: 20px;">
+            <mat-label>Url 4</mat-label>
+            <input style="border-radius: 15px;
+                height: 50px;
+                border-color: #00e5ff;
+                background: transparent;" [(ngModel)]="url4" type="text">
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="CREAR PDF">
+      <div style="min-height: 800px;">
+        <h2>RECURSOS MULTIMEDIA </h2>
+        <mat-grid-list cols="3" rowHeight="2:1">
+          <mat-grid-tile>
+            <div style="display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: space-around;
+            align-items: stretch;">
+              <p>Imagen de Portada</p>
+              <input type="file" (change)="capturarFile1($event)" />
+
+              <div *ngIf="previsualizacion1">
+                <img width="100%" [src]="previsualizacion1" alt="" [ngModel]="imagen1">
+              </div>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile style="display: flex;">
+            <div style="display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: space-around;
+            align-items: stretch;">
+              <p>Imagen Adicional</p>
+              <input type="file" (change)="capturarFile2($event)" />
+
+              <div *ngIf="previsualizacion2">
+                <img width="100%" [src]="previsualizacion2" alt="" [ngModel]="imagen2">
+              </div>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile style="display: flex;">
+            <div style="display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: space-around;
+            align-items: stretch;">
+              <p>Imagen Adicional 2</p>
+              <input type="file" (change)="capturarFile3($event)" />
+
+              <div *ngIf="previsualizacion3">
+                <img width="100%" [src]="previsualizacion3" alt="" [ngModel]="imagen3">
+              </div>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile style="display: flex;">
+            <div style="display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: space-around;
+            align-items: stretch;">
+              <p>Imagen Adicional 3</p>
+              <input type="file" (change)="capturarFile4($event)" />
+
+              <div *ngIf="previsualizacion4">
+                <img width="100%" [src]="previsualizacion4" alt="" [ngModel]="imagen4">
+              </div>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile style="display: flex;">
+            <div style="display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: space-around;
+            align-items: stretch;">
+              <p>Firma del Cliente</p>
+              <input type="file" (change)="capturarFile5($event)" />
+
+              <div *ngIf="previsualizacion5">
+                <img width="100%" [src]="previsualizacion5" alt="" [ngModel]="firmaCliente">
+              </div>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile style="display: flex;">
+            <div style="display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: space-around;
+            align-items: stretch;">
+              <p>Firma del Representante de Home Energy</p>
+              <input type="file" (change)="capturarFile6($event)" />
+
+              <div *ngIf="previsualizacion6">
+                <img width="100%" [src]="previsualizacion6" alt="" [ngModel]="firmaHomeEnergy">
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <div class="create-pdf" (click)="crearPDF()">
+          <mat-icon mat-list-icon>picture_as_pdf</mat-icon>
+          <h3>GENERAR PDF</h3>
+        </div>
+        <form [formGroup]="formularioEmail" (ngSubmit)="enviar_Email()" style="padding-top: 5px;width: 100%;">
+
+          <mat-form-field style="width: 80%;" appearance="fill">
+            <mat-label>Emails</mat-label>
+            <input matInput type="text" placeholder="" formControlName="para">
+          </mat-form-field>
+
+          <button mat-flat-button color="primary" type="submit" style="float: right;width: 18%;height: 50px;">Enviar
+            Email</button>
+        </form>
+        <p>{{date}}</p>
+        <div>
+          <button mat-raised-button color="primary" (click)=" Crear_Cotizacion()">Guardar</button>
+          <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+        </div>
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+  <!-----<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+    <button mat-raised-button color="primary" (click)="Crear_Cotizacion()">Crear</button>
+    <button mat-raised-button color="primary" (click)="Editar_Cotizacion()">Editar</button>
+  </mat-dialog-actions>---->

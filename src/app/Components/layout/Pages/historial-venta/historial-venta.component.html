@@ -1,4 +1,4 @@
-<h1 style="margin: 20px 0px 0px 40px">Historial de Venta</h1>
+<h1 style="margin: 20px 0px 0px 40px; color: #fff;">Historial de Venta</h1>
 <mat-card style="margin: 20px 40px 40px 40px">
 
   <mat-card-content>
@@ -34,11 +34,14 @@
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" [disabled]="formularioBusqueda.invalid" type="submit"
-          class="boton-buscar">
+        <button style="border: #f8f8f8;
+  background: #40c3ffab; display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;padding: 10px;" [disabled]="formularioBusqueda.invalid" type="submit" class="boton-buscar">
           <mat-icon>search</mat-icon>Buscar
         </button>
-
       </div>
     </form>
 

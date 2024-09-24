@@ -1,9 +1,6 @@
+<h1 style="margin: 20px 0px 0px 40px; color: #fff;">Clientes según sus usuarios y asignación</h1>
 <mat-card style="margin: 20px 40px 40px 40px">
   <mat-card-content>
-    <h2>Clientes según sus usuarios y asignación</h2>
-
-
-
     <mat-grid-list cols="12" rowHeight="750px">
       <mat-grid-tile colspan="2">
 
@@ -12,7 +9,10 @@
         align-content: space-around;
         flex-wrap: nowrap;
         align-items: flex-start;">
-          <button mat-flat-button color="primary" style="width: 100%;" (click)="traerTodos()">Todos</button>
+          <div class="card-info" (click)="traerTodos()">
+            <h3>Todos</h3>
+          </div>
+
           <div *ngFor="let itemUsuario of listadeMisUsuarios; trackBy:trackByItems1; let i=index"
             (click)="traerClientes(itemUsuario.nombreCompleto)" style="display:flex;">
             <div style="display: flex;">
@@ -23,8 +23,8 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="10" rowHeight="650px">
         <div style="width: 90%;">
-          <div *ngIf="nombre">
-            <h1>Prospectos para el usuario {{nombre}}</h1>
+          <div *ngIf="nombre" class="card-info-titulo">
+            <h1 class="textoSubtitle">Prospectos para el usuario: {{nombre}}</h1>
           </div>
           <div class="row">
             <div *ngFor="let itemDelUsuario of listaClienteUsuarioNombre; trackBy:trackByItems; let i=index"

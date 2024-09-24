@@ -1,8 +1,8 @@
 <mat-dialog-content style="min-height: 800px;width: 100%;">
 
   <!-----AQUI TERMINA MI CAJA DE PRUEBA -->
-  <mat-tab-group headerPosition="below" style="width: 100%;">
-    <mat-tab label="First">
+  <mat-tab-group headerPosition="below">
+    <mat-tab label="PRESENTATION">
       <div class="card cajitaAncho">
         <div class="row g-0">
           <div class="col-md-8">
@@ -31,358 +31,319 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Second">
-      <h1 class="card-title montserratFont">Servicios ofertados para:</h1>
-      <h3 class="card-title montserratFont">{{movieListObject[0].nombre}}</h3>
-      <h3 class="card-title montserratFont">Dirección</h3>
-      <h3 class="card-title montserratFont">{{movieListObject[0].direccion}}</h3>
-      <form [formGroup]="formularioServicioVenta" (ngSubmit)="agregarServicioParaVenta()">
+    <mat-tab label="ONE">
+      <div class="boxModal">
+        <div style="display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: baseline;">
+          <h3 class="card-title montserratFont">Servicios ofertados para: </h3>
+          <h3 class="card-title montserratFont">{{movieListObject[0].nombre}}</h3>
+        </div>
+        <div style="display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: baseline;">
+          <h3 class="card-title montserratFont">Dirección</h3>
+          <h3 class="card-title montserratFont">{{movieListObject[0].direccion}}</h3>
+        </div>
+        <div style="display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: baseline;">
+          <h3 class="card-title montserratFont">Pulgadas 2</h3>
+          <input type="number" [(ngModel)]="pulgadasCuadradas"
+            style="border-color: #334D6E;border-radius: 15px;text-align: center;" class="montserratFont">
+        </div>
+        <form [formGroup]="formularioServicioVenta" (ngSubmit)="agregarServicioParaVenta()">
 
-        <mat-grid-list cols="4" rowHeight="120px">
+          <mat-grid-list cols="4" rowHeight="120px">
 
-          <mat-grid-tile [colspan]="2">
+            <mat-grid-tile [colspan]="2">
 
-            <mat-form-field class="full-width" appearance="fill">
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Servicio</mat-label>
+                <input matInput type="text" placeholder="Buscar..." [matAutocomplete]="auto" formControlName="servicio">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                  (optionSelected)="servicioParaVenta($event)" [displayWith]="mostrarServicio">
+                  <mat-option *ngFor="let option of listaServiciosFiltro" [value]="option">
+                    {{option.nombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </mat-grid-tile>
 
-              <mat-label>Servicio</mat-label>
-              <input matInput type="text" placeholder="Buscar..." [matAutocomplete]="auto" formControlName="servicio">
-              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
-                (optionSelected)="servicioParaVenta($event)" [displayWith]="mostrarServicio">
-                <mat-option *ngFor="let option of listaServiciosFiltro" [value]="option">
-                  {{option.nombre}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile>
-            <mat-form-field class="full-width" appearance="fill" style="margin-left: 40px;">
-              <mat-label>Pulgadas Cuadradas</mat-label>
-              <input matInput type="number" formControlName="cantidad" />
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile>
-            <button mat-raised-button color="primary" style="width: 80%;" [disabled]="formularioServicioVenta.invalid">
-              <mat-icon mat-list-icon>add</mat-icon>Agregar
-            </button>
-          </mat-grid-tile>
-
-        </mat-grid-list>
-
-      </form>
-      <mat-grid-list cols="4" rowHeight="80px">
-        <mat-grid-tile [colspan]="2" class="montserratFont">
-          <mat-form-field class="full-width" appearance="outline" style="margin-left: 40px;">
-            <mat-label>Tipo de Pago</mat-label>
-            <mat-select [(value)]="tipodePagoPorDefecto">
-              <mat-option value="Efectivo">Contado</mat-option>
-              <mat-option value="Tarjeta">Tarjeta</mat-option>
-              <mat-option value="CuotasSinIni">A cuotas sin inicial</mat-option>
-              <mat-option value="CuotasConIni15">Cuotas con Inicial del 15%</mat-option>
-              <mat-option value="CuotasConIni25">Cuotas con Inicial del 25%</mat-option>
-              <mat-option value="CuotasConIni35">Cuotas con Inicial del 35%</mat-option>
-              <mat-option value="CuotasConIni45">Cuotas con Inicial del 45%</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile style="display: flex;">
-          <button mat-raised-button color="accent" style="width: 80%;">
-            TOTAL:SD/.{{totalPagar.toFixed(2)}}
-          </button>
-          <button mat-raised-button color="accent" style="width: 10%;" (click)="resetTotalPagar()">reset
-          </button>
-        </mat-grid-tile>
-
-
-      </mat-grid-list>
-      <div class="mat-elevation-z2">
-        <table mat-table [dataSource]="datosDetalleVenta" class="montserratFont">
-
-          <ng-container matColumnDef="servicio">
-            <th mat-header-cell *matHeaderCellDef>Servicio</th>
-            <td mat-cell *matCellDef="let element">{{element.descripcionServicio}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="cantidad">
-            <th mat-header-cell *matHeaderCellDef>Cantidad</th>
-            <td mat-cell *matCellDef="let element">{{element.cantidad}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="stock">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">{{element.stock}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="precio">
-            <th mat-header-cell *matHeaderCellDef>Precio</th>
-            <td mat-cell *matCellDef="let element">{{element.precioTexto}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element"></td>
-          </ng-container>
-
-          <ng-container matColumnDef="accion">
-            <th mat-header-cell *matHeaderCellDef style="width: 80px"></th>
-            <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="warn" (click)="eliminarServicio(element)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
-          <tr mat-row *matRowDef="let row; columns: columnasTabla"></tr>
-        </table>
-      </div>
-
-      <mat-grid-list cols="4" rowHeight="80px">
-        <mat-grid-tile [colspan]="3"></mat-grid-tile>
-        <mat-grid-tile>
-          <button mat-raised-button color="primary" style="width: 80%;"
-            [disabled]="listaServiciosParaVenta.length<1||bloquearBotonRegistrar" (click)="registrarVenta()">
-            <mat-icon>new_label</mat-icon>Registrar
-          </button>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-tab>
-    <mat-tab label="Third">
-      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-        <mat-tab label="CASH" style="display: flex;justify-content: center;">
-          <div style="display: flex;height: 400px;">
-            <button mat-raised-button style="width: 80%;margin-top: 100px;height: 50px;margin-bottom: 100px;">
-              {{totalPagar.toFixed(2)}}
-            </button>
-            <button mat-raised-button style="margin-top: 100px;height: 50px;" (click)="validarTipoPago()">
-              <img width="30px" src="../../../../../assets/images/lupa.png">
-            </button>
-            <button mat-raised-button style="margin-top: 100px;height: 50px;" (click)="resetTotalPagar()">
-              <img width="30px" src="../../../../../assets/images/actualizar-flecha.png">
-            </button>
-          </div>
-          <h1 class="montserratFont">Resumen</h1>
-          <div class="mat-elevation-z2">
-            <table mat-table [dataSource]="datosDetalleVenta" style="display: flex;">
-
-              <ng-container matColumnDef="servicio">
-                <th class="montserratFont" style="display: flex;" mat-header-cell *matHeaderCellDef>Servicios</th>
-                <td class="montserratFont" mat-cell *matCellDef="let element">{{element.descripcionServicio}}</td>
-              </ng-container>
-
-              <ng-container matColumnDef="cantidad">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"></td>
-              </ng-container>
-
-              <ng-container matColumnDef="stock">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"></td>
-              </ng-container>
-
-              <ng-container matColumnDef="precio">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"></td>
-              </ng-container>
-
-              <ng-container matColumnDef="total">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"></td>
-              </ng-container>
-
-              <ng-container matColumnDef="accion">
-                <th mat-header-cell *matHeaderCellDef style="width: 80px"></th>
-                <td mat-cell *matCellDef="let element">
-                </td>
-              </ng-container>
-
-
-              <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
-              <tr mat-row *matRowDef="let row; columns: columnasTabla"></tr>
-            </table>
-          </div>
-
-
-
-        </mat-tab>
-        <mat-tab label="FINANCING">
-          <mat-grid-list cols="2" rowHeight="650px">
             <mat-grid-tile>
-              <div style="display:flex;flex-direction: column;align-items: flex-start;width: 100%;">
+              <mat-form-field class="full-width" appearance="fill" style="margin-left: 40px;">
+                <mat-label>Pulgadas Cuadradas</mat-label>
+                <input matInput type="number" formControlName="cantidad" />
+              </mat-form-field>
+            </mat-grid-tile>
 
-                <div id="canvas">
+            <mat-grid-tile>
+              <button mat-raised-button color="primary" style="width: 80%;"
+                [disabled]="formularioServicioVenta.invalid">
+                <mat-icon mat-list-icon>add</mat-icon>Agregar
+              </button>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+
+        </form>
+        <mat-grid-list cols="3" rowHeight="80px">
+          <mat-grid-tile [colspan]="2" class="montserratFont" style="height: 100%;">
+            <mat-form-field class="full-width" appearance="outline" style="border: none;">
+              <mat-label>Tipo de Pago</mat-label>
+              <mat-select [(value)]="tipodePagoPorDefecto">
+                <mat-option value="Efectivo">Contado</mat-option>
+                <mat-option value="Tarjeta">Tarjeta</mat-option>
+                <mat-option value="CuotasSinIni">A cuotas sin inicial</mat-option>
+                <mat-option value="CuotasConIni15">Cuotas con Inicial del 15%</mat-option>
+                <mat-option value="CuotasConIni25">Cuotas con Inicial del 25%</mat-option>
+                <mat-option value="CuotasConIni35">Cuotas con Inicial del 35%</mat-option>
+                <mat-option value="CuotasConIni45">Cuotas con Inicial del 45%</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile style="display: flex;height: 60%;">
+            <button mat-raised-button color="primary" style="width: 80%;height: 40px;">
+              <h3 class="textoSubtitle" style="padding: 5px;color: #fff;">TOTAL: {{totalPagar.toFixed(2)}}</h3>
+            </button>
+            <button mat-raised-button color="warn" style="width: 20%;height: 40px;" (click)="resetTotalPagar()">reset
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <div class="mat-elevation-z2">
+          <table mat-table [dataSource]="datosDetalleVenta" class="montserratFont">
+
+            <ng-container matColumnDef="servicio">
+              <th mat-header-cell *matHeaderCellDef>Servicio</th>
+              <td mat-cell *matCellDef="let element">{{element.descripcionServicio}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+              <td mat-cell *matCellDef="let element">{{element.cantidad}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="stock">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">{{element.stock}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="precio">
+              <th mat-header-cell *matHeaderCellDef>Precio</th>
+              <td mat-cell *matCellDef="let element">{{element.precioTexto}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+
+            <ng-container matColumnDef="accion">
+              <th mat-header-cell *matHeaderCellDef style="width: 80px"></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="warn" (click)="eliminarServicio(element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnasTabla"></tr>
+          </table>
+        </div>
+
+        <mat-grid-list cols="4" rowHeight="80px">
+          <mat-grid-tile [colspan]="3"></mat-grid-tile>
+          <mat-grid-tile>
+            <button mat-raised-button color="primary" style="width: 80%;"
+              [disabled]="listaServiciosParaVenta.length<1||bloquearBotonRegistrar" (click)="registrarVenta()">
+              <mat-icon>new_label</mat-icon>Registrar
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-tab>
+    <mat-tab label="TWO">
+      <div class="boxModal">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+          <mat-tab label="CASH" style="display: flex;justify-content: center;">
+            <div style="display: flex;height:250px;">
+              <button mat-raised-button style="width: 100%;margin-top: 100px;height: 80px;margin-bottom: 100px;color:#334D6E;
+              font-family: 'Roboto';
+              font-size: 18px!important;
+              font-weight: 400;">
+                {{totalPagar.toFixed(2)}}
+              </button>
+              <button mat-raised-button style="margin-top: 100px;height: 80px;" (click)="validarTipoPago()">
+                <img width="30px" src="../../../../../assets/images/lupa.png">
+              </button>
+              <button mat-raised-button style="margin-top: 100px;height: 80px;" (click)="resetTotalPagar()">
+                <img width="30px" src="../../../../../assets/images/actualizar-flecha.png">
+              </button>
+            </div>
+            <h1 class="montserratFont">Resumen</h1>
+            <!------------- <mat-card style="margin: 20px 40px 40px 40px">
+              <mat-card-content>
+                <div class="row">
+                  <div *ngFor="let item of listaServiciosAgregadosALaOrden; trackBy:trackByItems; let i=index"
+                    class="card col-12 m-3 p-0" style="max-width: 340px;max-height:200px;">
+                    <h5 class="card-title">{{item.idServicio}}</h5>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>-------->
+            <div class="mat-elevation-z2">
+              <table mat-table [dataSource]="datosDetalleVenta" style="display: flex;padding-left: 20px;">
+
+                <ng-container matColumnDef="servicio">
+                  <th class="montserratFont" style="display: flex;" mat-header-cell *matHeaderCellDef>Servicios</th>
+                  <td class="montserratFont" mat-cell *matCellDef="let element">{{element.descripcionServicio}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="cantidad">
+                  <th mat-header-cell *matHeaderCellDef>Pulgadas Cuadradas</th>
+                  <td class="montserratFont" mat-cell *matCellDef="let element" style="padding-left: 30px;">
+                    {{element.cantidad}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="stock">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element"></td>
+                </ng-container>
+
+                <ng-container matColumnDef="precio">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element"></td>
+                </ng-container>
+
+                <ng-container matColumnDef="total">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element"></td>
+                </ng-container>
+
+                <ng-container matColumnDef="accion">
+                  <th mat-header-cell *matHeaderCellDef style="width: 80px"></th>
+                  <td mat-cell *matCellDef="let element">
+                  </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnasTabla"></tr>
+              </table>
+            </div>
+          </mat-tab>
+          <mat-tab label="FINANCING" style="padding: 20px;">
+            <mat-grid-list cols="2" rowHeight="500px">
+              <mat-grid-tile>
+                <div id="canvas" style="width: 100%;">
                   <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="data" [gradient]="gradient"
                     [legend]="showLegend" [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)"
                     (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
                   </ngx-charts-pie-chart>
                 </div>
-                <div style="display:flex;
-                  flex-direction: column;
-                  flex-wrap: nowrap;
-                  align-items: flex-start;">
 
-                  <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="totalInteres">
-                  <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="interesxMes">
-                  <div style="display: flex;
-                    flex-direction: row;
-                    flex-wrap: nowrap;
-                    align-content: stretch;
-                    justify-content: space-evenly;
-                    align-items: baseline;">
-                    <h3 class="montserratFont">VALOR A CANCELAR POR INTERESES</h3>
-                    <input class="inputTotal" type="text" [(ngModel)]="totalInteresTxt">
-                  </div>
-                  <div style="display: flex;
-                    flex-direction: row;
-                    flex-wrap: nowrap;
-                    align-content: stretch;
-                    justify-content: space-evenly;
-                    align-items: baseline;">
-                    <h3 class="montserratFont">CUOTA MENSUAL</h3>
-                    <input class="inputTotal" type="text" [(ngModel)]="interesxMesTxt">
-                  </div>
-                </div>
-
-              </div>
-            </mat-grid-tile>
-            <mat-grid-tile style="display: flex;">
-              <div class="buttonsFinancing">
-                <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="totalPagar">
-                <h3 class="montserratFont">TOTAL A PAGAR</h3>
-                <input class="inputTotal" type="text" [(ngModel)]="totalPagarTxt">
-                <section>
-                  <button class="buttonFive" type="button" (click)="operacionFive()">5 Años</button>
-                  <button class="buttonFive" type="button" (click)="operacionTeen()">10 Años</button>
-                  <button class="buttonFive" type="button" (click)="operacionTweetyFive()">15 Años</button>
-                  <h3 class="montserratFont">AHORRA</h3>
+              </mat-grid-tile>
+              <mat-grid-tile style="display: flex;">
+                <div class="buttonsFinancing">
+                  <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="totalPagar">
+                  <h3 class="montserratFont">TOTAL A PAGAR</h3>
                   <input class="inputTotal" type="text" [(ngModel)]="totalPagarTxt">
-                </section>
-              </div>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </mat-tab>
-        <mat-tab label="SOLAR">
-          <mat-grid-list cols="2" rowHeight="650px">
-            <mat-grid-tile>
-              <div class="buttonsFinancing">
-                <h3 class="montserratFont">ENERGIA ELÉCTRICA</h3>
-                <h5 class="montserratFont">PAGO MENSUAL</h5>
-                <input class="inputTotal" type="text" [(ngModel)]="facturaEE">
-                <h5 class="montserratFont">% INCREMENTO ANUAL</h5>
-                <input class="inputTotal" type="text" [(ngModel)]="porcentajeIA">
-                <section class="cajaProyeccion">
-                  <div class="ustedPagara">PROYECCIÓN</div>
-                  <h5 class="montserratFont">MENSUALIDADES APROXIMADAS:</h5>
-                  <input class="inputTotal" type="text" [(ngModel)]="cuotasMensualesEETxt">
-                  <h5 class="montserratFont">HABRÁ CANCELADO ALREDEDOR DE :</h5>
-                  <input class="inputTotal" type="text" [(ngModel)]="totalPagosAnualesTxt">
-                </section>
-              </div>
-            </mat-grid-tile>
-            <mat-grid-tile>
-              <div class="contenedorSolar">
-                <div class="cajaSolar">
-                  <h3 class="montserratFont">ENERGÍA SOLAR</h3>
-                  <input class="inputTotal" [(ngModel)]="cuotasMensualesES">
+                  <section>
+                    <button class="buttonFive" type="button" (click)="operacionFive()">5 Años</button>
+                    <button class="buttonFive" type="button" (click)="operacionTeen()">10 Años</button>
+                    <button class="buttonFive" type="button" (click)="operacionTweetyFive()">15 Años</button>
+                    <h3 class="montserratFont">AHORRA</h3>
+                    <input class="inputTotal" type="text" [(ngModel)]="totalPagarTxt">
+                  </section>
                 </div>
-                <button class="inputSolar" type="button" (click)="calcularCuotas()">10 Años</button>
-                <button class="inputSolar" type="button" (click)="calcularCuotas15()">15 Años</button>
-                <button class="inputSolar" type="button" (click)="calcularCuotas30()">30 Años</button>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <div style="display:flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items: flex-start;width:100%;">
+
+              <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="totalInteres">
+              <input class="inputTotal" style="display: none;" type="text" [(ngModel)]="interesxMes">
+              <div style="display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              align-content: stretch;
+              justify-content: space-evenly;
+              align-items: baseline;">
+                <h3 class="montserratFont">VALOR A CANCELAR POR INTERESES</h3>
+                <input class="inputTotal" type="text" [(ngModel)]="totalInteresTxt">
               </div>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-tab>
-    <mat-tab label="six">
-      <h2>RELEASE OF REABILITY</h2>
-      <div style="padding: 20px;
-      display: flex;
-      width: 100%;
-      flex-flow: column;
-      align-content: space-around;
-      align-items: center;height: 700px;">
-
-        <form class="example-form" style="width: 100%;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-items: center;">
-          <mat-form-field class="example-full-width" style="width: 100%;">
-            <mat-label>Font size</mat-label>
-            <mat-select #fontSize value="16px" (selectionChange)="triggerResize()">
-              <mat-option value="10px">10px</mat-option>
-              <mat-option value="12px">12px</mat-option>
-              <mat-option value="14px">14px</mat-option>
-              <mat-option value="16px">16px</mat-option>
-              <mat-option value="18px">18px</mat-option>
-              <mat-option value="20px">20px</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <textarea [style.fontSize]="fontSize.value" style="font-size: 20px;
-            max-height: 500px;
-            height: 500px;width: 100%;" [(ngModel)]="contrato">This General Release (this “Release”) is made on NaN-NaN-NaN between Dayna Garcia and Nevada Power Solutions 1. Releasor and anyone claiming on behalf of Releasor releases and forever discharges Releasee and its af/liates, successors and assigns, of/cers, employees, representatives, partners, agents and anyone claiming through them (collectively, the “Released Parties”), in their individual and3or corporate capacities from any and all claims outside the scope of Solar installation and liabilities, obligations, promises, agreements, disputes, demands, damages, causes of action of any nature and kind, known or unknown, which Releasor has or ever had or may in the future have against Releasee or any of the Released Parties arising out of or relating to: Adders to the system outside the scope of Solar Installation.(“Claims”). 2. This Release shall not be in any way construed as an admission by the Releasee that it has acted wrongfully with respect to Releasor or any other person, that it admits liability or responsibility at any time for any purpose, or that Releasor has any rights whatsoever against the Releasee. nB. This Release shall be binding upon and inure to the bene/t of the parties and their respective heirs, administrators, personal representatives, executors, successors and assigns. Releasor has the authorityto release the Claims and has not assigned or transferred any Claims to any other party. The provisionsof this Release are severable. If any provision is held to be invalid or unenforceable, it shall not affect thevalidity or enforceability of any other provision. This Release constitutes the entire agreement betweenthe parties and supersedes any and all prior oral or written agreements or understandings betweenthe parties concerning the subject matter of this Release. This Release may not be altered, amendedor modi/ed, except by a written document signed by both parties. The terms of this Release shall begoverned by and construed in accordance with the laws of the State3Commonwealth of Nevada Power Solutions. 4. +oth parties represent they fully understand their right to review all aspects of this Release withattorneys of their choice, that they have had the opportunity to consult with attorneys of their choice,that they have carefully read and fully understand all the provisions of this Release and that they are freely, knowingly and voluntarily entering into this Release.
-        </textarea>
-          <div style="margin-left: 80%;
-          float: right;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: flex-end;
-          flex-wrap: nowrap;
-          align-content: space-around;
-      ">
-            <img src="../../../../../assets/images/check_Mesa de trabajo 1.png" style="width: 60px;height: 60px;"
-              id="btnAcepto">
-            <h1>ACEPTO</h1>
-          </div>
-        </form>
-
-
-
-        <!---<textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-          cdkAutosizeMaxRows="5" [style.fontSize]="fontSize.value">
-          </textarea>--->
-      </div>
-      <!-------
-      {{movieListObject[0].idProspecto}}
-      {{movieListObject[0].contacto}}
-      {{movieListObject[0].nombre}}
-      {{movieListObject[0].fachadaimg}}
-      <br>
-      <div class="card cajitaAncho">
-        <div class="row g-0">
-          <div class="col-md-8">
-            <img src="../../../../../assets/images/{{movieListObject[0].fachadaimg}}" class="img-fluid rounded-start"
-              alt="...">
-          </div>
-          <div class="col-md-4 montserratFont">
-            <div class="card-body montserratFont">
-              <h1 class="card-title montserratFont">PROPUESTA PARA:</h1>
-              <h3 class="card-title ">Nombres y apellidos</h3>
-              <h3 class="card-title ">{{movieListObject[0].nombre}}</h3>
-              <h3 class="card-title ">Dirección</h3>
-              <h3 class="card-title ">{{movieListObject[0].direccion}}</h3>
-              <h3 class="card-title ">Contácto</h3>
-              <h3 class="card-title ">{{movieListObject[0].contacto}}</h3>
-              <h3 class="card-title ">Razón Social</h3>
-              <h3 class="card-title ">{{movieListObject[0].razonSocial}}</h3>
-              <h3 class="card-title">Auditor</h3>
-              <h3 class="card-title">{{movieListObject[0].idauditor}}</h3>
-              <h3 class="card-title">Notas</h3>
-              <h3 class="card-title">{{movieListObject[0].detalle}}</h3>
-              <p class="card-text"><small class="text-body-secondary">Los datos personales son tratados de forma
-                  confidencial y utilizados solo por HOME ENERGY</small></p>
+              <div style="display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              align-content: stretch;
+              justify-content: space-evenly;
+              align-items: baseline;">
+                <h3 class="montserratFont">CUOTA MENSUAL</h3>
+                <input class="inputTotal" type="text" [(ngModel)]="interesxMesTxt">
+              </div>
             </div>
-          </div>
-        </div>
-      </div>----->
+          </mat-tab>
+          <mat-tab label="SOLAR">
+            <mat-grid-list cols="2" rowHeight="650px">
+              <mat-grid-tile>
+                <div class="buttonsFinancing">
+                  <h3 class="montserratFont">ENERGIA ELÉCTRICA</h3>
+                  <h5 class="montserratFont">PAGO MENSUAL</h5>
+                  <input class="inputTotal" type="text" [(ngModel)]="facturaEE">
+                  <h5 class="montserratFont">% INCREMENTO ANUAL</h5>
+                  <input class="inputTotal" type="text" [(ngModel)]="porcentajeIA">
+                  <section class="cajaProyeccion">
+                    <div class="ustedPagara">PROYECCIÓN</div>
+                    <h5 class="montserratFont">MENSUALIDADES APROXIMADAS:</h5>
+                    <input class="inputTotal" type="text" [(ngModel)]="cuotasMensualesEETxt">
+                    <h5 class="montserratFont">HABRÁ CANCELADO ALREDEDOR DE :</h5>
+                    <input class="inputTotal" type="text" [(ngModel)]="totalPagosAnualesTxt">
+                  </section>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="contenedorSolar">
+                  <div class="cajaSolar">
+                    <h3 class="montserratFont">ENERGÍA SOLAR</h3>
+                    <input class="inputTotal" [(ngModel)]="cuotasMensualesES">
+                  </div>
+                  <button class="inputSolar" type="button" (click)="calcularCuotas()">10 Años</button>
+                  <button class="inputSolar" type="button" (click)="calcularCuotas15()">15 Años</button>
+                  <button class="inputSolar" type="button" (click)="calcularCuotas30()">30 Años</button>
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-tab>
+    <mat-tab label="THREE" style="max-width: 100%;">
+      <h2>RELEASE OF REABILITY</h2>
+      <div style="display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-content: space-around;
+      justify-content: space-around;
+      align-items: center;height: 700px;padding-left: 60px;">
+        <textarea class="montserratFont" [(ngModel)]='myTextarea' rows="30" cols="100%" style="width: 100%;">
+        </textarea>
+      </div>
+      <!--------<p>The value of the textarea field is: {{myTextarea}}"</p>------>
     </mat-tab>
     <!--------------------AQUI EMPIEZA LA SECCION SEVEN LA CUAL ES INFORMACION PARA COMPLETAR LA ORDEN-->
 
-    <mat-tab label="sevem" style="max-width: 100%;">
+    <mat-tab label="FOUR" style="max-width: 100%;">
       <h2>INFORMATION ADICIONALITY </h2>
 
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -478,7 +439,7 @@
         <button mat-flat-button color="primary" type="submit" style="float: right;">Guardar</button>
       </form>
 
-      <p>CARGA DE IMAGENES</p>
+      <h2>RECURSOS MULTIMEDIA </h2>
       <mat-grid-list cols="2" rowHeight="2:1">
         <mat-grid-tile>
           <div style="display: flex;
@@ -564,13 +525,26 @@
             </div>
           </div>
         </mat-grid-tile>
-
       </mat-grid-list>
-      <p>{{date}}</p>
 
+      <div class="create-pdf" (click)="crearPDF()">
+        <mat-icon mat-list-icon>picture_as_pdf</mat-icon>
+        <h3>GENERAR PDF</h3>
+      </div>
+      <form [formGroup]="formularioEmail" (ngSubmit)="enviar_Email()" style="padding-top: 5px;width: 100%;">
+
+        <mat-form-field style="width: 80%;" appearance="fill">
+          <mat-label>Emails</mat-label>
+          <input matInput type="text" placeholder="" formControlName="para">
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" style="float: right;width: 18%;height: 50px;">Enviar
+          Email</button>
+      </form>
+      <p>{{date}}</p>
     </mat-tab>
-    <mat-tab label="nnnne" style="max-height: 700px;">
-      <form [formGroup]="formularioEmail" (ngSubmit)="enviar_Email()">
+    <!------  <mat-tab label="FIVE">
+      <form [formGroup]="formularioEmail" (ngSubmit)="enviar_Email()" style="height:300px;">
 
         <mat-form-field style="width: 80%;" appearance="fill">
           <mat-label>Emails</mat-label>
@@ -579,15 +553,20 @@
 
         <button mat-flat-button color="primary" type="submit" style="float: right;">Enviar Email</button>
       </form>
-      <button mat-raised-button color="primary" type="button" style="float: left;" (click)="crearPDF()">GENERAR
-        PDF</button>
 
+      <div class="create-pdf" (click)="crearPDF()">
+        <mat-icon mat-list-icon>picture_as_pdf</mat-icon>
+        <h3>GENERAR PDF</h3>
+      </div>
+      <div style="height: 450px;" (click)="crearPDF()">
 
-    </mat-tab>
+      </div>
+      <button mat-raised-button color="primary" type="button" style="float: left;" (click)="crearPDF()">GENERAR PDF</button>
+    </mat-tab>----------->
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button mat-dialog-close color="warn">Volver</button>
   <!--<button mat-raised-button color="primary"[disabled]="formularioServicio.invalid"(click)="guardarEditar_Servicio()">{{botonAccion}}</button> -->
-  <button mat-raised-button color="primary">Guardar</button>
+  <button mat-raised-button color="primary" (click)="guardar_Cotizacion()">Guardar</button>
 </mat-dialog-actions>

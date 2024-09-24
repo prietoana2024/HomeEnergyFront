@@ -54,10 +54,57 @@
 .mis-botones-ocultos{
   display: flex;
 }
+.container{
+  padding: 50px;
+}
 @media (max-width: 500px) {
 
   .barra-busqueda{
 
     display: block;
   }
+}
+.textoSubtitle{
+  color:#334D6E;
+  font-family: 'Roboto';
+  font-size: 16px!important;;
+  font-weight: 400;
+ }
+ .parrafo{
+   color:#334D6E;
+  font-family: 'Roboto';
+  font-size:16px;
+  font-weight: 300;
+ }
+
+ .mat-option-text{
+  color:#334D6E;
+  font-family: 'Roboto';
+  font-size:16px;
+  font-weight: 300;
+ }
+ .textoSubtitleSearch{
+  color:#334D6E;
+  font-family: 'Roboto';
+  font-size:16px;
+  font-weight: 300;
+  width: 100%;
+  background-color: #fff;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+ }
+ .card-info{
+  width: 350px;
+  border-radius: 18px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: #f8f8f8;
+  background: rgba(243, 251, 254, 0.168);
+  margin-bottom: 20px;
+}
+.card-info-box{
+  background: rgba(243, 251, 254, 0.168);
+  width: 100%;
 }

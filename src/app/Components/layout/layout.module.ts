@@ -46,6 +46,7 @@ import { FormularioSelectComponent } from './Pages/formulario-select/formulario-
 import { ModalClienteEditComponent } from './Modales/modal-cliente-edit/modal-cliente-edit.component';
 import { RelacionClienteUsuarioComponent } from './Pages/relacion-cliente-usuario/relacion-cliente-usuario.component';
 import { ClienteVComponent } from './Pages/cliente-v/cliente-v.component';
+import { ModalFormCotizacionComponent } from './Modales/modal-form-cotizacion/modal-form-cotizacion.component';
 @NgModule({
   declarations: [
     DashBoardComponent,
@@ -88,7 +89,8 @@ import { ClienteVComponent } from './Pages/cliente-v/cliente-v.component';
     FormularioSelectComponent,
     ModalClienteEditComponent,
     RelacionClienteUsuarioComponent,
-    ClienteVComponent
+    ClienteVComponent,
+    ModalFormCotizacionComponent
   ],
   imports: [
     CommonModule,

@@ -21,6 +21,7 @@ import { Servicio } from 'src/app/Interfaces/servicio';
 import { ServicioService } from 'src/app/Services/servicio.service';
 
 import { DetalleVenta } from 'src/app/Interfaces/detalle-venta';
+import { ModalFormCotizacionComponent } from '../../Modales/modal-form-cotizacion/modal-form-cotizacion.component';
 
 @Component({
   selector: 'app-cotizacion',
@@ -184,6 +185,7 @@ export class CotizacionComponent implements OnInit, AfterViewInit{
     this.dialog.open(ModalPruebaComponent, {
         disableClose: true,
         data: prospecto,
+        width:'100%'
       }).afterClosed().subscribe(resultado => {
         if(resultado === "true")this.obtenerProspecto();
       });
@@ -304,18 +306,23 @@ export class CotizacionComponent implements OnInit, AfterViewInit{
     this.dialog.open(ModalCotizacionComponent, {
         disableClose: true,
         data:this.movieListObject,
+        width:'100%',
+        height:'900px',
       }).afterClosed().subscribe(resultado => {
         if(resultado === "true")this.obtenerProspecto();
       });
   }
   openDetails(item:Prospecto){
-    this.dialog.open(ModalCotizacionComponent, {
+    this.dialog.open(ModalFormCotizacionComponent, {
       disableClose: true,
-      data:this.movieListObject,
+      data:item,
+      width:'100%',
+      height:'900px',
     }).afterClosed().subscribe(resultado => {
       if(resultado === "true")this.obtenerProspecto();
     });
     
+
 
     this.Auditor=item.idauditor;
     console.log(this.Auditor.toString());
@@ -339,6 +346,8 @@ export class CotizacionComponent implements OnInit, AfterViewInit{
     this.dialog.open(ModalCotizacionComponent, {
       disableClose: true,
       data:this.listaProspectos,
+      width:'100%',
+      height:'900px',
     }).afterClosed().subscribe(resultado => {
       if(resultado === "true")this.obtenerProspecto();
     });

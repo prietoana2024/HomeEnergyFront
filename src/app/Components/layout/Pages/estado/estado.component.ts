@@ -54,7 +54,7 @@ export class EstadoComponent implements OnInit, AfterViewInit {
   }
   nuevoEstado() {
     this.dialog.open(ModalEstadoComponent, {
-        disableClose: true,
+        disableClose: true
       }).afterClosed().subscribe(resultado => {
         if(resultado === "true")this.obtenerEstados();
       });

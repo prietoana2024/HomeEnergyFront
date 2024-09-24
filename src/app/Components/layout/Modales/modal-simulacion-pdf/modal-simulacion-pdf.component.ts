@@ -134,7 +134,7 @@ export class ModalSimulacionPdfComponent implements OnInit {
     return producto.nombre;
   }
 
-  guardarEditar_Cotizacion(){
+  Editar_Cotizacion(){
 
     console.log("Entre a la funcion");
   
@@ -171,19 +171,7 @@ export class ModalSimulacionPdfComponent implements OnInit {
       pdf:this.formularioCotizacion.value.Pdf,
       Servicios:this.formularioCotizacion.value.Servicios}
       console.log(_arreglo);
-    if(this.datosCotizacion==null){
 
-     this._cotizacionServicio.registrar(_cotizacion).subscribe({
-      next:(data)=>{
-        if(data.status){
-          this._utilidadServicio.mostrarAlerta("El usuario fue registrado","Exito");
-          this.modalActual.close("true")
-        }else
-        this._utilidadServicio.mostrarAlerta("No se pudo registrar el usuario","Error")
-      },
-      error:(e)=>{}
-     })
-    }else{
       this._cotizacionServicio.editarCotizacion(_cotizacion).subscribe({
         next:(data)=>{
           if(data.status){
@@ -194,7 +182,56 @@ export class ModalSimulacionPdfComponent implements OnInit {
         },
         error:(e)=>{}
       })
-    }
+    
+   }
+   Crear_Cotizacion(){
+
+    console.log("Entre a la funcion");
+  
+    const _arreglo:Servicio[]=this.formularioCotizacion.value.Servicios;
+
+    const _cotizacion:Cotizacion={
+      idCotizacion:this.datosCotizacion==null ? 0 : this.datosCotizacion.idCotizacion,
+      idProspecto:this.formularioCotizacion.value.IdProspecto,
+      pulgadas2:this.formularioCotizacion.value.Pulgadas2,
+      tipoPago:this.formularioCotizacion.value.TipoPago,
+      totalTexto:this.formularioCotizacion.value.TotalTexto,
+      tiempoFinancing:this.formularioCotizacion.value.TiempoFinancing,
+      ahorraTexto:this.formularioCotizacion.value.AhorraTexto,
+      valorInteresesTexto:this.formularioCotizacion.value.ValorInteresesTexto,
+      cuotaMensualTexto:this.formularioCotizacion.value.CuotaMensualTexto,
+      pagoElectricidadTexto:this.formularioCotizacion.value.PagoElectricidadTexto,
+      porcentajeIncremento:this.formularioCotizacion.value.PorcentajeIncremento,
+      mensualAproxTexto:this.formularioCotizacion.value.MensualAproxTexto,
+      valorPagadoTexto:this.formularioCotizacion.value.ValorPagadoTexto,
+      proyeccionSolarTexto:this.formularioCotizacion.value.ProyeccionSolarTexto,
+      tiempoSolar:this.formularioCotizacion.value.TiempoSolar,
+      contrato:this.formularioCotizacion.value.Contrato,
+      email:this.formularioCotizacion.value.Email,
+      tipoIdentificacion:this.formularioCotizacion.value.TipoIdentificacion,
+      identificacion:this.formularioCotizacion.value.Identificacion,
+      socEin:this.formularioCotizacion.value.SocEin,
+      tamanoSistema:this.formularioCotizacion.value.TamanoSistema,
+      pagoInicialTexto:this.formularioCotizacion.value.PagoInicialTexto,
+      notas:this.formularioCotizacion.value.Notas,
+      url1:this.formularioCotizacion.value.Url1,
+      url2:this.formularioCotizacion.value.Url2,
+      url3:this.formularioCotizacion.value.Url3,
+      url4:this.formularioCotizacion.value.Url4,
+      pdf:this.formularioCotizacion.value.Pdf,
+      Servicios:this.formularioCotizacion.value.Servicios}
+      console.log(_arreglo);
+
+     this._cotizacionServicio.registrar(_cotizacion).subscribe({
+      next:(data)=>{
+        if(data.status){
+          this._utilidadServicio.mostrarAlerta("La simulacióm fue registrada con exito","Exito");
+          this.modalActual.close("true")
+        }else
+        this._utilidadServicio.mostrarAlerta("No se pudo registrar la simulacion","Error")
+      },
+      error:(e)=>{}
+     })
    }
 
 }

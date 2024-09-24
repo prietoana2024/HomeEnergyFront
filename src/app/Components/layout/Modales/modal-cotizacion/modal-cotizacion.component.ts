@@ -6,7 +6,7 @@ import { Prospecto } from 'src/app/Interfaces/prospecto';
 import { ProspectoService } from 'src/app/Services/prospecto.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilidadService } from 'src/app/Reutilizable/utilidad.service';
-import { FormBuilder,FormGroup,Validators,FormsModule } from '@angular/forms';
+import { FormBuilder,FormGroup,Validators,FormsModule, FormArray } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, ViewChild,NgZone,Inject} from '@angular/core';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModalPruebaComponent } from '../../Modales/modal-prueba/modal-prueba.component';
@@ -58,7 +58,10 @@ import { PdfService } from 'src/app/Services/pdf.service';
 import { first } from 'rxjs';
 import { Email } from 'src/app/Interfaces/email';
 import { EmailService } from 'src/app/Services/email.service';
+import { CotizacionService } from 'src/app/Services/cotizacion.service';
+import { Cotizacion } from 'src/app/Interfaces/cotizacion';
 //TERMINA IMPORTACIONES PARA EL PDF
+import { ModalSimulacionPdfComponent } from '../../Modales/modal-simulacion-pdf/modal-simulacion-pdf.component';
 export interface Task {
   name: string;
   completed: boolean;
@@ -71,6 +74,27 @@ export interface Task {
   styleUrls: ['./modal-cotizacion.component.css']
 })
 export class ModalCotizacionComponent implements OnInit{
+
+  // ESTA ES LA VARIABLE IMPORTANTE DE TODO ESTE ARCHIVO PARA QUE FUNCIONE LA DIRECTIVA ngModel
+  dato="";
+  myTextarea:string="This General Release (this “Release”) is made on NaN-NaN-NaN between Dayna Garcia and Nevada Power Solutions 1. Releasor and anyone claiming on behalf of Releasor releases and forever discharges Releasee and its af/liates, successors and assigns, of/cers, employees, representatives, partners, agents and anyone claiming through them (collectively, the “Released Parties”), in their individual and3or corporate capacities from any and all claims outside the scope of Solar installation and liabilities, obligations, promises, agreements, disputes, demands, damages, causes of action of any nature and kind, known or unknown, which Releasor has or ever had or may in the future have against Releasee or any of the Released Parties arising out of or relating to: Adders to the system outside the scope of Solar Installation.(“Claims”). 2. This Release shall not be in any way construed as an admission by the Releasee that it has acted wrongfully with respect to Releasor or any other person, that it admits liability or responsibility at any time for any purpose, or that Releasor has any rights whatsoever against the Releasee. nB. This Release shall be binding upon and inure to the bene/t of the parties and their respective heirs, administrators, personal representatives, executors, successors and assigns. Releasor has the authorityto release the Claims and has not assigned or transferred any Claims to any other party. The provisionsof this Release are severable. If any provision is held to be invalid or unenforceable, it shall not affect thevalidity or enforceability of any other provision. This Release constitutes the entire agreement betweenthe parties and supersedes any and all prior oral or written agreements or understandings betweenthe parties concerning the subject matter of this Release. This Release may not be altered, amendedor modi/ed, except by a written document signed by both parties. The terms of this Release shall begoverned by and construed in accordance with the laws of the State3Commonwealth of Nevada Power Solutions. 4. +oth parties represent they fully understand their right to review all aspects of this Release withattorneys of their choice, that they have had the opportunity to consult with attorneys of their choice,that they have carefully read and fully understand all the provisions of this Release and that they are freely, knowingly and voluntarily entering into this Release.";
+  pagoInicialTexto:string;
+  contratoModificado:string;
+  pagoElectricidadTexto:string;
+  porcentajeIncremento:number;
+  mensualAproxTexto:string;
+  valorPagadoTexto:string;
+  proyeccionSolarTexto:string;
+  tiempoSolar=30;
+
+  ahorraTexto:string;
+  valorInteresesTexto:string;
+  cuotaMensualTexto:string;
+  tiempoFinancing:number;
+  pulgadasCuadradas:number;
+  servicioForm!: FormGroup;
+  cotizacion:Cotizacion
+  formularioCotizacion:FormGroup;
 
   pdfString:String;
 
@@ -101,6 +125,7 @@ export class ModalCotizacionComponent implements OnInit{
   public archivos:any=[];
   date = new Date();
   public templateEmail:string;
+  
   public imagen1:string;
   public imagen2:string;
   public imagen3:string;
@@ -126,7 +151,9 @@ export class ModalCotizacionComponent implements OnInit{
 
   formOrden:FormGroup;
 
-  contrato:string;
+  contrato:string="";
+
+  contrato2:"This General Release (this “Release”) is made on NaN-NaN-NaN between Dayna Garcia and Nevada Power Solutions 1. Releasor and anyone claiming on behalf of Releasor releases and forever discharges Releasee and its af/liates, successors and assigns, of/cers, employees, representatives, partners, agents and anyone claiming through them (collectively, the “Released Parties”), in their individual and3or corporate capacities from any and all claims outside the scope of Solar installation and liabilities, obligations, promises, agreements, disputes, demands, damages, causes of action of any nature and kind, known or unknown, which Releasor has or ever had or may in the future have against Releasee or any of the Released Parties arising out of or relating to: Adders to the system outside the scope of Solar Installation.(“Claims”). 2. This Release shall not be in any way construed as an admission by the Releasee that it has acted wrongfully with respect to Releasor or any other person, that it admits liability or responsibility at any time for any purpose, or that Releasor has any rights whatsoever against the Releasee. nB. This Release shall be binding upon and inure to the bene/t of the parties and their respective heirs, administrators, personal representatives, executors, successors and assigns. Releasor has the authorityto release the Claims and has not assigned or transferred any Claims to any other party. The provisionsof this Release are severable. If any provision is held to be invalid or unenforceable, it shall not affect thevalidity or enforceability of any other provision. This Release constitutes the entire agreement betweenthe parties and supersedes any and all prior oral or written agreements or understandings betweenthe parties concerning the subject matter of this Release. This Release may not be altered, amendedor modi/ed, except by a written document signed by both parties. The terms of this Release shall begoverned by and construed in accordance with the laws of the State3Commonwealth of Nevada Power Solutions. 4. +oth parties represent they fully understand their right to review all aspects of this Release withattorneys of their choice, that they have had the opportunity to consult with attorneys of their choice,that they have carefully read and fully understand all the provisions of this Release and that they are freely, knowingly and voluntarily entering into this Release."
 
   clic = 1;
   task: Task = {
@@ -165,6 +192,7 @@ export class ModalCotizacionComponent implements OnInit{
   listaServicios:Servicio[]=[];
   listaServiciosFiltro:Servicio[]=[];
   listaProspectos:Prospecto[]=[];
+  listaServiciosAgregadosALaOrden:Servicio[]=[];
 
   listaServiciosTable:DetalleVenta[]=[];
 
@@ -231,7 +259,7 @@ export class ModalCotizacionComponent implements OnInit{
 
   formularioEmail:FormGroup;
   formularioServicioVenta:FormGroup;
-  columnasTabla:string[]=['servicio','cantidad','stock','precio','total','accion'];
+  columnasTabla:string[]=['servicio','cantidad','precio','total','accion'];
   datosDetalleVenta=new MatTableDataSource(this.listaServiciosParaVenta);
 
   formularioServicios:FormGroup;
@@ -269,8 +297,8 @@ export class ModalCotizacionComponent implements OnInit{
       identificacion: new FormControl(1112, Validators.minLength(2)),
       socEin: new FormControl(454544,Validators.required),
       tamanoSistema: new FormControl('GRANDE', Validators.minLength(2)),
-      pagoTotal: new FormControl('GRANDE',Validators.required),
-      pagoInicial: new FormControl('GRANDE',Validators.required),
+      pagoTotal: new FormControl('0',Validators.required),
+      pagoInicial: new FormControl('0',Validators.required),
       notas:new FormControl('GRANDE',Validators.required),
       url1:new FormControl('GRANDE',Validators.required),
       url2:new FormControl('GRANDE',Validators.required),
@@ -287,6 +315,10 @@ export class ModalCotizacionComponent implements OnInit{
       console.log(this.form.value.url1);
       console.log(this.form.value.url2);
       console.log(this.form.value.direccion);
+      console.log(this.form.value.telefono);
+      console.log(this.form.value.socEin);
+      console.log(this.form.value.tipoIdentificacion);
+      console.log(this.form.value.identificacion);
       if(this.form.valid){
         alert("El formulario fue validado y los datos guardados")
       }else{
@@ -312,10 +344,56 @@ export class ModalCotizacionComponent implements OnInit{
     private _ngZone: NgZone,
     private _formBuilder: FormBuilder,
     public pdfService:PdfService,
-    private sanitizer:DomSanitizer
+    private sanitizer:DomSanitizer,
+    private _cotizacionServicio:CotizacionService,
 
   ) 
   {
+    this.servicioForm = this.fb.group({
+      servicio: this.fb.array([
+        this.fb.group({
+          idServicio: [, Validators.required],
+          nombre: ['', Validators.required],
+          idCategoria: [, Validators.required],
+          descripcionCategoria: ['', Validators.required],
+          precio: ['', Validators.required],
+          esActivo: [, Validators.required]
+        }),
+      ]),
+    });
+    /*COMIENZA CREAR COTIZACION*/
+    this.formularioCotizacion=this.fb.group({
+      IdProspecto:[,Validators.required],
+      Pulgadas2:[,Validators.required],
+      TipoPago:['',Validators.required],
+      TotalTexto:['',Validators.required],
+      TiempoFinancing:[,Validators.required],
+      AhorraTexto:['',Validators.required],
+      ValorInteresesTexto:['',Validators.required],
+      CuotaMensualTexto:['',Validators.required],
+      PagoElectricidadTexto:['',Validators.required],
+      PorcentajeIncremento:[,Validators.required],
+      MensualAproxTexto:['',Validators.required],
+      ValorPagadoTexto:['',Validators.required],
+      ProyeccionSolarTexto:['',Validators.required],
+      TiempoSolar:[,Validators.required],
+      Contrato:['',Validators.required],
+      Email:['',Validators.required],
+      TipoIdentificacion:['',Validators.required],
+      Identificacion:[,Validators.required],
+      SocEin:[,Validators.required],
+      TamanoSistema:['',Validators.required],
+      PagoInicialTexto:['',Validators.required],
+      Notas:['',Validators.required],
+      Url1:[''],
+      Url2:[''],
+      Url3:[''],
+      Url4:[''],
+      Pdf:['',Validators.required],
+      FechaRegistro:['',Validators.required],
+      Servicios:this.listaServicios
+    });
+    /*TERMINA CREAR COTIZACION*/
     
     //Object.assign(this, { single });
 
@@ -354,7 +432,7 @@ export class ModalCotizacionComponent implements OnInit{
       socEin:[,Validators.required],
       tamanoSistema:['',Validators.required],
       pagoTotal:[this.totalPagarTxt,Validators.required],
-      pagoInicial:[,Validators.required],
+      pagoInicial:[this.pagoInicialTexto,Validators.required],
       notas:[''],
       url1:['',Validators.required],
       url2:['',Validators.required],
@@ -1166,6 +1244,7 @@ capturarFile6(event):any{
       };
       this.data=[...this.data,dataPeru];
     },1500);
+
   }
 
   obtenerProspecto() {
@@ -1250,6 +1329,7 @@ capturarFile6(event):any{
       totalTexto:String(_total.toFixed(2))
     })
 
+    
 
     this.datosDetalleVenta=new MatTableDataSource(this.listaServiciosParaVenta);
 
@@ -1259,8 +1339,21 @@ capturarFile6(event):any{
 
     })
 
+    this.listaServiciosAgregadosALaOrden.push({
+      idServicio:this.servicioSeleccionado.idServicio,
+      nombre:this.servicioSeleccionado.nombre,
+      idCategoria:this.servicioSeleccionado.idCategoria,
+      descripcionCategoria:this.servicioSeleccionado.descripcionCategoria,
+      precio:this.servicioSeleccionado.precio,
+      esActivo:this.servicioSeleccionado.esActivo
+    })
+    //this.listaServiciosAgregadosALaOrden=this.formularioServicioVenta.value.Servicios;
+    console.log(this.listaServiciosAgregadosALaOrden)
+    this.servicioForm.value.servicio=this.datosDetalleVenta.data;
+
     console.log(this.datosDetalleVenta.data);
 
+    console.log(this.servicioForm.value.servicio);
     const datos= {
       a: 'somestring',
       b: 42,
@@ -1365,9 +1458,15 @@ separarElemDeArray(elementos);
   eliminarServicio(detalle:DetalleVenta){
     this.totalPagar=this.totalPagar-parseFloat(detalle.totalTexto),
     this.listaServiciosParaVenta=this.listaServiciosParaVenta.filter(p=>p.idServicio!=detalle.idServicio);
+    this.listaServiciosAgregadosALaOrden=this.listaServicios.filter(p=>p.idServicio==detalle.idServicio);
+    console.log(this.listaServiciosAgregadosALaOrden);
+    
     this.datosDetalleVenta=new MatTableDataSource(this.listaServiciosParaVenta);
+    console.log()
   }
-
+  trackByItems(index:number,dataListaServicio:any):number{
+    return dataListaServicio.idServicio;
+  }
   registrarVenta(){
     if(this.listaServiciosParaVenta.length>0){
       this.bloquearBotonRegistrar=true;
@@ -1441,6 +1540,16 @@ separarElemDeArray(elementos);
     this.valorCuotaTxt.join('.');
     this.ahorraTxt=this.totalInteresTxt;
 
+    this.tiempoFinancing=5;
+    const ahorraRedondeado=this.ahorra.toFixed(0);
+    this.ahorraTexto=ahorraRedondeado.toString();
+    
+    const valorInteresesRedondeado=this.totalInteres.toFixed(0);
+    this.valorInteresesTexto=valorInteresesRedondeado.toString();
+    const cuotaMensualRedondeado=this.valorCuota.toFixed(0);
+    this.cuotaMensualTexto=cuotaMensualRedondeado.toString();
+    
+
     this.data=DATA_BAR_CHART;
 
     setTimeout(()=>{
@@ -1490,6 +1599,15 @@ separarElemDeArray(elementos);
     this.valorCuotaTxt.join('.');
     this.ahorraTxt=this.totalInteresTxt;
 
+    this.tiempoFinancing=10;
+    const ahorraRedondeado=this.ahorra.toFixed(0);
+    this.ahorraTexto=ahorraRedondeado.toString();
+    const valorInteresesRedondeado=this.totalInteres.toFixed(0);
+    this.valorInteresesTexto=valorInteresesRedondeado.toString();
+    const cuotaMensualRedondeado=this.valorCuota.toFixed(0);
+    this.cuotaMensualTexto=cuotaMensualRedondeado.toString();
+    
+
     this.data=DATA_BAR_CHART;
 
     setTimeout(()=>{
@@ -1537,6 +1655,14 @@ separarElemDeArray(elementos);
     this.valorCuotaTxt.join('.');
     this.ahorraTxt=this.totalInteresTxt;
 
+    this.tiempoFinancing=15;
+    const ahorraRedondeado=this.ahorra.toFixed(0);
+    this.ahorraTexto=ahorraRedondeado.toString();
+
+    const valorInteresesRedondeado=this.totalInteres.toFixed(0);
+    this.valorInteresesTexto=valorInteresesRedondeado.toString();
+    const cuotaMensualRedondeado=this.valorCuota.toFixed(0);
+    this.cuotaMensualTexto=cuotaMensualRedondeado.toString();
     this.data=DATA_BAR_CHART;
 
     setTimeout(()=>{
@@ -1587,9 +1713,12 @@ separarElemDeArray(elementos);
 
   validarTipoPago(){
 
+
     if(this.tipodePagoPorDefecto=="Efectivo"){
       alert("El pago en efectivo no cambia el valor total a pagar");
       console.log("El valor no ha cambiado");
+      this.pagoInicialTexto="0"
+
 
     }else if(this.tipodePagoPorDefecto=="CuotasConIni15"){
      const porcentaje=(this.totalPagar*15)/100;
@@ -1599,6 +1728,8 @@ separarElemDeArray(elementos);
      this.inicial=porcentaje;
      console.log(this.inicial+"Este es el valor de cuota inicial");
 
+     this.pagoInicialTexto=this.inicial.toString();
+
     }else if(this.tipodePagoPorDefecto=="CuotasConIni25"){
       const porcentaje=(this.totalPagar*25)/100;
       this.inicial=porcentaje;
@@ -1606,8 +1737,9 @@ separarElemDeArray(elementos);
       
       this.inicial=porcentaje;
       console.log(this.inicial+"Este es el valor de cuota inicial");
+      this.totalPagar=this.totalPagar-porcentaje;
+      this.pagoInicialTexto=this.inicial.toString();
 
-     this.totalPagar=this.totalPagar-porcentaje;
     }else if(this.tipodePagoPorDefecto=="CuotasConIni35"){
       const porcentaje=(this.totalPagar*35)/100;
       console.log(porcentaje+"Este es el 35%");
@@ -1615,6 +1747,7 @@ separarElemDeArray(elementos);
 
      this.inicial=porcentaje;
      console.log(this.inicial+"Este es el valor de cuota inicial");
+      this.pagoInicialTexto=this.inicial.toString();
 
     }else if(this.tipodePagoPorDefecto=="CuotasConIni45"){
       const porcentaje=(this.totalPagar*45)/100;
@@ -1623,13 +1756,20 @@ separarElemDeArray(elementos);
 
      this.inicial=porcentaje;
      console.log(this.inicial+"Este es el valor de cuota inicial");
+     this.pagoInicialTexto=this.inicial.toString();
 
 
     }else{
       console.log("No se a cumplido con cuota, el valor es entero");
       console.log(this.inicial+"Este es el valor es cero");
+      this.pagoInicialTexto="0";
     }
-  }
+
+    this.form.patchValue({
+      pagoTotal:this.totalPagar.toString(),
+      pagoInicial:this.pagoInicialTexto
+     })
+    };
 
   eliminarServicios(){
 
@@ -1649,6 +1789,9 @@ separarElemDeArray(elementos);
     const totalEETeen=(valorAnual+porcentajexAño)*10;
     const totalEEFifteen=(valorAnual+porcentajexAño)*15;
     const totalEEThirty=(valorAnual+porcentajexAño)*30;
+    
+
+    
 
   }
   operacionTeenSolar(){
@@ -1662,6 +1805,8 @@ separarElemDeArray(elementos);
     this.totalEETxt=this.totalEE.toString().split('.');
     this.totalEETxt[0]=this.totalEETxt[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');
     this.totalEETxt.join('.');
+
+   
   }
   operacionFifteen(){
     //porcentaje de incremento anual
@@ -1794,7 +1939,14 @@ separarElemDeArray(elementos);
 
         
 
-        console.log(this.totalPagosAnuales+" Este anterior es el total cancelado en pagos anuales en energia electrica")
+        console.log(this.totalPagosAnuales+" Este anterior es el total cancelado en pagos anuales en energia electrica");
+
+        this.pagoElectricidadTexto=this.facturaEE.toString();
+        this.porcentajeIncremento=this.porcentajeIA;
+        this.mensualAproxTexto=this.cuotasMensualesEETxt.toString();
+        this.valorPagadoTexto=this.totalPagosAnualesTxt.toString();
+        this.proyeccionSolarTexto=this.cuotasMensualesES.toString();
+        this.tiempoSolar=10;
 
       }
       calcularCuotas15(){
@@ -1835,6 +1987,12 @@ separarElemDeArray(elementos);
 
         console.log(this.totalPagosAnuales+" Este anterior es el total cancelado en pagos anuales en energia electrica")
 
+        this.pagoElectricidadTexto=this.facturaEE.toString();
+        this.porcentajeIncremento=this.porcentajeIA;
+        this.mensualAproxTexto=this.cuotasMensualesEETxt.toString();
+        this.valorPagadoTexto=this.totalPagosAnualesTxt.toString();
+        this.proyeccionSolarTexto=this.cuotasMensualesES.toString();
+        this.tiempoSolar=15;
     }
     calcularCuotas30(){
 
@@ -1873,8 +2031,13 @@ separarElemDeArray(elementos);
 
       
 
-      console.log(this.totalPagosAnuales+" Este anterior es el total cancelado en pagos anuales en energia electrica")
-
+      console.log(this.totalPagosAnuales+" Este anterior es el total cancelado en pagos anuales en energia electrica");
+      this.pagoElectricidadTexto=this.facturaEE.toString();
+      this.porcentajeIncremento=this.porcentajeIA;
+      this.mensualAproxTexto=this.cuotasMensualesEETxt.toString();
+      this.valorPagadoTexto=this.totalPagosAnualesTxt.toString();
+      this.proyeccionSolarTexto=this.cuotasMensualesES.toString();
+      this.tiempoSolar=30;
     }
     confirmarOrden(){
       if (this.formOrden.valid) {
@@ -1882,6 +2045,9 @@ separarElemDeArray(elementos);
         console.log(this.formOrden.value.nombre);
         console.log(this.formOrden.value.telefono);
         console.log(this.formOrden.value.socEin);
+        console.log(this.formOrden.value.tipoIdentificacion);
+        console.log(this.formOrden.value.identificacion);
+        console.log(this.formOrden.value.pagoInicialTexto);
       }
       else{
         alert("FILL ALL FIELDS")
@@ -1941,4 +2107,104 @@ separarElemDeArray(elementos);
           alert("FILL ALL FIELDS")
         }
       }
-    } 
+
+      copiarContrato(){
+        this.contrato="fakhkfdhlfds";
+      }
+      actualizarContrato(){
+
+         const id="contratoEditado";
+         console.log('value: ' + id);
+        const  elemento = document.getElementById(id).innerHTML;
+        console.log(elemento);
+
+       
+      }
+      guardar_Cotizacion(){
+
+        console.log("Entre a la funcion");
+
+        const _arreglo=this.servicioForm.value.servicio;
+
+
+        const _cotizacion:Cotizacion={
+          descripcionProspecto:this.movieListObject[0].nombre,
+          idProspecto:this.movieListObject[0].idProspecto,
+          pulgadas2:this.pulgadasCuadradas,
+          tipoPago:this.tipodePagoPorDefecto,
+          totalTexto:this.totalPagar.toFixed(0),
+          tiempoFinancing:this.tiempoFinancing,
+          ahorraTexto:this.ahorraTexto,
+          valorInteresesTexto:this.valorInteresesTexto,
+          cuotaMensualTexto:this.cuotaMensualTexto,
+          pagoElectricidadTexto:this.pagoElectricidadTexto,
+          porcentajeIncremento:this.porcentajeIncremento,
+          mensualAproxTexto:this.mensualAproxTexto,
+          valorPagadoTexto:this.valorPagadoTexto,
+          proyeccionSolarTexto:this.proyeccionSolarTexto,
+          tiempoSolar:this.tiempoSolar,
+          contrato:this.myTextarea,
+          email:this.form.value.email,
+          tipoIdentificacion:this.form.value.tipoIdentificacion,
+          identificacion:this.form.value.identificacion,
+          socEin:this.form.value.socEin,
+          tamanoSistema:this.form.value.tamanoSistema,
+          pagoInicialTexto:this.pagoInicialTexto,
+          notas:this.form.value.notas,
+          url1:this.form.value.url1,
+          url2:this.form.value.url2,
+          url3:this.form.value.url3,
+          url4:this.form.value.url4,
+          pdf:"MI PDF",
+          Servicios:_arreglo
+        }
+       /* tipoIdentificacion:['',Validators.required],
+      identificacion:[,Validators.required],
+      socEin:[,Validators.required],
+      tamanoSistema:['',Validators.required],
+      pagoTotal:[this.totalPagarTxt,Validators.required],
+      pagoInicial:[,Validators.required],
+      notas:[''],
+      url1:['',Validators.required],
+      url2:['',Validators.required],
+      url3:['',Validators.required],
+      url4:['',Validators.required]*/
+          //console.log(_arreglo);
+          console.log(_cotizacion.idProspecto);
+          console.log(_cotizacion.pulgadas2);
+          console.log(_cotizacion.tipoPago);
+          console.log(_cotizacion.totalTexto);
+          console.log(_cotizacion.tiempoFinancing);
+          console.log(_cotizacion.ahorraTexto);
+          console.log(_cotizacion.valorInteresesTexto);
+          console.log(_cotizacion.cuotaMensualTexto);
+          console.log(_cotizacion.pagoElectricidadTexto);
+          console.log(_cotizacion.porcentajeIncremento);
+          console.log(_cotizacion.mensualAproxTexto);
+          console.log(_cotizacion.valorPagadoTexto);
+          console.log(_cotizacion.proyeccionSolarTexto);
+          console.log(_cotizacion.tiempoSolar);
+          console.log(_cotizacion.contrato);
+          console.log(_cotizacion.email);
+          console.log(_cotizacion.tipoIdentificacion);
+          console.log(_cotizacion.identificacion);
+          console.log(_cotizacion.socEin);
+          console.log(_cotizacion.tamanoSistema);
+          console.log(_cotizacion.pagoInicialTexto);
+          console.log(_cotizacion.notas);
+          console.log(_cotizacion.url1);
+          console.log(_cotizacion.url2);
+          console.log(_cotizacion.url3);
+          console.log(_cotizacion.url4);
+          console.log(_cotizacion.pdf);
+          console.log(_cotizacion.Servicios);
+
+          this.dialog.open(ModalSimulacionPdfComponent, {
+            disableClose: true,
+            data:_cotizacion
+            }).afterClosed().subscribe(resultado => {
+              if(resultado === "true"){}
+            });
+        
+          }
+}
